@@ -1,0 +1,359 @@
+# Radar screens and flows
+
+The final CS3216 prototype should make the three core flows clickable without a
+facilitator. The alternate Ask Radar route may reuse those same objects. The
+widget is stretch scope.
+
+## Screen inventory
+
+### S00 Welcome
+
+Purpose: Explain the product in one decision-focused sentence and begin quickly.
+
+Content order:
+
+1. Restrained radar mark and `Radar`.
+2. `Find the opportunities worth your time.`
+3. `Personalised NUS-relevant opportunities, clear source information, and one
+   place to plan deadlines.`
+4. Primary `Set up my Radar`.
+5. Secondary `View demo` for testing.
+6. `Student-built for NUS students — not an official NUS service.`
+
+Prototype login: `Continue with NUS email` may lead to a deterministic demo user;
+do not simulate collection of a real password.
+
+States: default, sign-in handoff, sign-in error.
+
+### S01 Profile setup
+
+Purpose: Collect only factors that immediately improve results.
+
+Steps:
+
+1. Study context: year and faculty/school.
+2. Interests: choose up to three categories.
+3. Goals and constraints: goal chips, preferred timing/mode; optional eligibility
+   facts can be skipped.
+4. Review: show how each factor will be used and link to privacy explanation.
+
+Rules: show progress; back preserves choices; `Skip for now` is available for
+optional details; never block browsing on perfect profile completion.
+
+Completion: `See my matches` enters S02 with a short, non-looping signal reveal.
+
+### S02 For You
+
+Purpose: Help the student find one worthwhile opportunity quickly.
+
+Content order:
+
+1. Top bar: `For You`, notification bell.
+2. Context: `Based on 3 interests · Edit`.
+3. Forecast preview: `Your 30-day Radar` with confirmed/expected counts.
+4. `Top matches` — two featured OpportunityCards.
+5. `Closing soon` — horizontal or vertical list; no autoplay carousel.
+6. `Because you chose Research` — list.
+7. Small `Tune my Radar` action.
+
+Primary interaction: open a top match. Secondary: Why Match, save, open Radar.
+
+States: loading skeleton; populated; new/low-information profile; no strong
+matches; offline cached state; catalogue error.
+
+### S03 Explore
+
+Purpose: Support deliberate browsing and known-item search.
+
+Content order:
+
+1. Top bar: `Explore`, notification bell.
+2. SearchField.
+3. Adjacent/secondary `Ask Radar` action.
+4. Canonical category row.
+5. Filter chips and `Filters (n)`.
+6. Result count + sort.
+7. OpportunityCard list.
+
+Behavior: conventional text search works independently of Ask Radar. Search and
+filters persist when returning from detail. URL/state should be shareable if the
+prototype environment allows.
+
+States: initial/latest; typing; results; no results; loading; error.
+
+### S04 Filter sheet
+
+Sections: categories, eligibility, deadline window, mode/location, commitment,
+sort. Footer: `Clear all`, primary `Show n opportunities`.
+
+The sheet previews the count as filters change. Zero results stays actionable.
+
+### S05 Opportunity detail
+
+Purpose: Answer “Does this fit me, is it credible, and what do I do next?”
+
+Content order:
+
+1. Child top bar: back, `Opportunity`, share, save.
+2. Optional organiser logo/category artwork (maximum 160 px height).
+3. Deadline state + exact date.
+4. Title and organiser.
+5. Source status.
+6. MatchIndicator + `Why this matches`.
+7. `At a glance`: programme dates, location/mode, commitment, category.
+8. Eligibility: `You meet`, `Check this`, and blockers.
+9. Plain-language summary.
+10. SourceTrustBlock with last checked and report action.
+11. ReviewSummary; latest two ReviewCards; `See all`.
+12. Similar opportunities.
+13. Sticky action: primary `Open official application`; secondary save/status.
+
+When returning from the external handoff simulation, show `Did you apply?` and
+allow `Mark as applied`.
+
+States: open, saved, preparing, applied, closed, full, cancelled, stale source,
+no reviews, loading, field-level source error.
+
+### S06 Why this matches sheet
+
+Show the current score/label, explanation, satisfied factors, missing profile
+facts, blockers, `Update profile`, and matching-method note. Closing returns focus
+to the exact originating card/detail control.
+
+### S07 30-day Radar
+
+Purpose: Plan known deadlines and watch plausible seasonal windows.
+
+Content order:
+
+1. Child top bar: back, `30-day Radar`, info.
+2. Range selector: `Next 30 days` (prototype may show only this one range without
+   a fake selector).
+3. Legend: Confirmed / Expected.
+4. Accessible timeline plus chronological list.
+5. `Needs action` confirmed items.
+6. `Worth watching` expected windows.
+7. Explanation: `Expected windows use previous organiser dates; current dates
+   have not been announced.`
+
+Selecting a confirmed item opens S05. Selecting an expected item opens S08.
+
+States: mixed, only confirmed, only expected, empty, loading, error.
+
+### S08 Expected opportunity preview
+
+Purpose: Explain a seasonal item without masquerading as a live listing.
+
+Content: title/category; `Expected`; approximate window; evidence/basis; previous
+source; what is unknown; `Watch for announcement`; similar currently open items.
+
+Watching adds it to Plan and confirms notification preference. It does not create
+a match score unless sufficient structured facts exist.
+
+### S09 Plan
+
+Purpose: Retrieve intentions and see the next required action.
+
+Content order:
+
+1. Top bar: `Plan`, notification bell.
+2. `Next up` summary with nearest deadline and next action.
+3. Status tabs: Saved, Preparing, Applied, Past.
+4. OpportunityCard list grouped by deadline month, not by arbitrary feed ranking.
+5. Watched expected windows section.
+6. Link to full 30-day Radar.
+
+Card-specific actions: set/edit reminder; set next action; change status; open
+detail. Empty tab explains how an item enters that state.
+
+States: populated per tab, empty per tab, permission denied, offline, error.
+
+### S10 Reminder sheet
+
+Show the opportunity, exact deadline, reminder presets, custom date/time, and
+notification permission note. Save returns to detail or Plan with persistent
+state and an Undo-capable confirmation.
+
+### S11 Ask Radar
+
+Purpose: Express a goal that filters do not capture naturally.
+
+Content order:
+
+1. Child top bar: back, `Ask Radar`, info/reset.
+2. Intro: `Describe the experience you want. Radar searches the same verified
+   catalogue.`
+3. Prompt starters on empty state.
+4. Conversation/message log.
+5. Interpreted criteria with removable chips.
+6. Compact canonical OpportunityCards.
+7. Composer.
+
+Deterministic response path A:
+
+User: `Find a summer research opportunity in data or AI.`  
+Radar: identifies Research + data/AI + summer, then returns matching fixtures
+with one-sentence fit reasons.
+
+Unknown path: `I couldn't find a current listing that meets every part. Should I
+relax the timing or include workshops?`
+
+States: empty, typing, responding, results, no results, error, reset.
+
+### S12 Reviews
+
+Purpose: Inspect student experience without over-trusting one score.
+
+Content: ReviewSummary, distribution, sort (`Most helpful`, `Newest`, `Most
+critical`), structured filter tags, ReviewCards, moderation note. Optional write
+review entry may be visually present but is not required in the core prototype.
+
+States: sufficient, sparse, none, loading, error.
+
+### S13 Notifications
+
+Purpose: Central inbox for explicitly relevant updates.
+
+Groups: Today, Earlier. Types: saved deadline, source change, watched item now
+confirmed, recommendation (only if opted in). Items deep-link directly to S05 or
+S08. Include `Mark all read` and `Notification settings`.
+
+### S14 Profile and preferences
+
+Sections: profile factors; interests and goals; matching explanation; notification
+preferences; privacy/data; About/disclaimer; sign out/reset demo.
+
+Updates immediately affect deterministic feed results and explain the change.
+
+### S15 Landing page
+
+Required public-marketing structure:
+
+1. Navigation: Radar mark/name; `How it works`; `Join waitlist`.
+2. Hero: `Find the opportunities worth your time.`
+3. Lead: explain personalised discovery, decision evidence, and deadline planning
+   in one short paragraph.
+4. Product preview focused on `Why this matches` and the 30-day Radar.
+5. Three outcome sections matching G1–G3.
+6. Trust section: source/freshness/forecast transparency.
+7. Waitlist form; prototype may show a successful local confirmation without
+   persistence.
+8. Student-built disclaimer and privacy/contact placeholder.
+
+The landing page uses the same tokens and components; it must not claim live user
+counts, NUS partnership, or working integrations.
+
+### X01 Lock-screen widget (stretch)
+
+Content: Radar name; saved/best-match opportunity title; match label if explainable;
+absolute deadline; compact next action. Tap deep-links to S05 for that exact ID.
+
+States: populated, permission required, no saved/relevant items, stale/closed.
+
+## Core flow 1 — Personalise and discover
+
+Hypothesis: a small amount of profile setup produces a shortlist that feels more
+useful than a high-volume feed.
+
+1. S00 Welcome → `Set up my Radar`.
+2. S01 Profile setup → choose Year 3, Computing, Research + Competitions + Career,
+   goal `Build experience`, mode `Any`.
+3. Finish → S02 For You.
+4. Open `Undergraduate Research Taster: Human-Centred AI` card.
+5. Before detail, open C08 `Why` from the card → S06.
+6. User reads satisfied factors and closes sheet.
+7. Open card → S05.
+
+Success criteria:
+
+- User completes setup without help.
+- User can state at least two reasons the item appeared.
+- User understands that 95% is profile fit, not admission likelihood.
+
+Failure/alternate states to prototype: skip optional profile detail; no strong
+matches; update one interest and observe feed change.
+
+## Core flow 2 — Decide, save, and act
+
+Hypothesis: standardised evidence and a connected next action reduce decision
+uncertainty and deadline loss.
+
+1. Start S05 on the research opportunity.
+2. Inspect deadline, eligibility, commitment, SourceTrustBlock, and review summary.
+3. Tap `Save` → confirmation offers `Set reminder`.
+4. Open S10 → choose `3 days before` → save.
+5. Tap `Open official application` → show an external-handoff interstitial with
+   destination domain → simulate return.
+6. Answer `Did you apply?` → `Mark as applied`.
+7. Open S09 Plan → Applied tab → find the same opportunity with identical facts.
+
+Success criteria:
+
+- User finds official source and last checked date without prompting.
+- User distinguishes eligibility from match.
+- Reminder and applied state persist across navigation and reload if local storage
+  is available.
+
+Failure/alternate states to prototype: stale source; closed deadline; failed
+external link; unsave with a reminder.
+
+## Core flow 3 — Forecast and watch
+
+Hypothesis: users value a forward-looking view if uncertainty is made explicit.
+
+1. S02 forecast preview → `Open Radar` → S07.
+2. User identifies one solid Confirmed item and one dashed Expected window.
+3. Select the expected `Global Innovation Internship` window → S08.
+4. Read basis and unknown date → `Watch for announcement`.
+5. Open S09 Plan → find it under Watched.
+6. Open S13 mock notification `Dates announced` → deep-link to now-confirmed S05.
+
+Success criteria:
+
+- User correctly explains Confirmed versus Expected.
+- User knows watching is an alert preference, not a guarantee.
+- Deep link opens the same selected opportunity.
+
+Failure/alternate states: empty forecast, forecast data error, notifications
+denied while watchlist still persists.
+
+## Alternate flow 4 — Ask Radar
+
+1. S03 Explore → `Ask Radar` → S11.
+2. Choose or type the summer research prompt.
+3. Inspect interpreted criteria and remove `summer` if needed.
+4. Open a result → S05 → continue Core flow 2.
+
+This route must reuse the catalogue and detail; it is not a separate product.
+
+## Prototype navigation map
+
+```text
+Welcome → Profile setup → For You
+                         ├─ Why Match sheet
+                         ├─ Opportunity detail → Reviews
+                         │                      ├─ Reminder sheet
+                         │                      └─ Official handoff → Applied
+                         └─ 30-day Radar → Expected preview → Watch
+
+Explore → Filters → Opportunity detail
+       └─ Ask Radar → Opportunity detail
+
+Plan → Opportunity detail / Reminder / 30-day Radar
+Profile → Preferences / Notifications / About
+Bell → Notifications → exact Opportunity detail or Expected preview
+Widget → exact Opportunity detail
+```
+
+## Wireframe corrections encoded here
+
+- The original linear tour is replaced by goal-based flows.
+- The bell opens Notifications, not Forecast.
+- A widget deep-links to the exact item.
+- Search works conventionally; Ask Radar is an explicit alternate route.
+- Saved becomes Plan, with a defined state model and status-changing interactions.
+- Reviews live inside detail and can expand to a dedicated screen.
+- One category taxonomy, opportunity object, rating count, and deadline value are
+  reused everywhere.
+- Current 2026 fictional fixtures replace inconsistent 2024 examples.
+

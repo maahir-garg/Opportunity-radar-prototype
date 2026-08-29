@@ -1,0 +1,384 @@
+# Radar Design System
+
+Version: 1.0  
+Design source: `06-RADAR.tokens.json`  
+Web implementation: `07-radar-tokens.css`
+
+## 1. Brand core
+
+### Working identity
+
+- Full name: **NUS Opportunity Radar**
+- Short name: **Radar**
+- Tagline: **Find your signal.**
+- Product promise: **Know what fits, what it takes, and what to do next.**
+- Landing-page descriptor: **The opportunity planner built around you.**
+
+### Personality
+
+Radar is:
+
+- **Clear, not crowded.** It reduces noise instead of celebrating volume.
+- **Credible, not institutional.** It feels dependable without pretending to be
+  an official NUS service.
+- **Optimistic, not hyped.** It invites exploration without “AI magic” claims.
+- **Student-native, not childish.** It is warm and direct, but serious about
+  deadlines and decisions.
+- **Forward-looking, not predictive theatre.** Forecasting is explicit about
+  what is known, expected, and uncertain.
+
+### Signature idea: signal over noise
+
+Use a restrained radar vocabulary: a single dot, partial concentric arcs, a
+sweep line, and small directional marks. The motif may appear in onboarding,
+the forecast, loading, empty states, and campaign assets. It must never obstruct
+content or become a background on every card.
+
+The visual system is an **editorial utility**: strong hierarchy, short labels,
+warm neutral space, precise dates, and one obvious next action.
+
+### Brand safety
+
+Unless permission is granted:
+
+- Do not use the NUS crest, seal, wordmark, or official app chrome.
+- Do not call listings “NUS verified” unless NUS performed the verification.
+- Prefer `Official source` or `Organiser verified`, which describe the evidence.
+- Include `Student-built for NUS students — not an official NUS service` in the
+  landing footer and About surface.
+
+## 2. Design principles
+
+### P1 — Lead with the decision
+
+Every screen should answer the user's next question. Cards prioritise deadline,
+title, organiser/source, fit, and action; secondary metadata follows.
+
+### P2 — Show the evidence
+
+Every recommendation, date, review summary, or forecast has an explanation or
+source one interaction away. Trust information sits near the primary action,
+not in a remote footer.
+
+### P3 — Calm urgency
+
+Urgent deadlines become more prominent, not more dramatic. Use clear labels,
+exact dates, and one warning color. No countdown animation, pulsing red, or
+shame-based copy.
+
+### P4 — One object, many views
+
+An opportunity has one data model and one component family across For You,
+Explore, Ask Radar, Plan, notifications, and the widget. Content must not change
+between surfaces.
+
+### P5 — AI stays inside the product logic
+
+Ask Radar is a route into the catalogue, not a disconnected chatbot. It returns
+the same opportunity cards, cites the same structured facts, and never overrides
+eligibility or source data.
+
+## 3. Color
+
+### Core palette
+
+| Token | Hex | Use |
+|---|---|---|
+| `navy-950` | `#071A2F` | Highest-contrast brand ink |
+| `navy-900` | `#0B2340` | Primary actions, active navigation |
+| `navy-800` | `#12355B` | Primary hover/pressed |
+| `blue-700` | `#2453B6` | Links, focus-supporting information |
+| `blue-100` | `#E8F0FF` | Informational surface |
+| `orange-700` | `#B84718` | Signal text on light surfaces |
+| `orange-600` | `#D95B2A` | Sparse signal accent, decorative active dot |
+| `orange-100` | `#FFF0E8` | Accent surface |
+| `teal-700` | `#087A68` | Verified/strong-match text |
+| `teal-100` | `#DDF7F0` | Verified/strong-match surface |
+| `amber-700` | `#7A5700` | Deadline warning text |
+| `amber-100` | `#FFF4CC` | Deadline warning surface |
+| `red-700` | `#B4233A` | Error, cancelled, destructive text |
+| `red-100` | `#FFE7EB` | Error surface |
+| `neutral-0` | `#FFFFFF` | Raised surface |
+| `neutral-25` | `#FCFCFA` | Quiet surface |
+| `neutral-50` | `#F6F7F4` | App canvas |
+| `neutral-100` | `#ECEFEA` | Subdued surface |
+| `neutral-200` | `#DDE2DD` | Default border |
+| `neutral-300` | `#C6CEC8` | Strong border/disabled control |
+| `neutral-500` | `#68746E` | Disabled text only |
+| `neutral-600` | `#505C57` | Secondary text |
+| `neutral-700` | `#35413C` | Strong secondary text |
+| `neutral-900` | `#15211D` | Default body text |
+
+### Semantic roles
+
+- Canvas: `neutral-50`.
+- Surface: `neutral-0`; quiet surface: `neutral-25`; subdued: `neutral-100`.
+- Primary text: `navy-950`; body text: `neutral-900`; secondary: `neutral-600`.
+- Primary action: `navy-900`, hover/pressed `navy-800`, white content.
+- Link and focus: `blue-700`.
+- Signal accent: `orange-600`; use the darker `orange-700` only for short signal
+  text on light surfaces. Do not use orange for body copy.
+- Verified/strong match: teal pair.
+- Deadline warning: amber pair.
+- Error/cancelled: red pair.
+
+### Color rules
+
+- Meaning never depends on color alone; pair every semantic color with text or
+  an icon.
+- Use no more than one semantic tint in a single compact component.
+- Never color an entire opportunity card according to category.
+- Category identity uses icon + text; an optional 4 px accent mark may use a
+  restrained category color, but the card remains neutral.
+- A primary button is navy, not orange. Orange is a signal, not a large CTA fill.
+- Do not use gradients in the application UI. Campaign artwork may use flat
+  overlapping radar arcs, not mesh or aurora gradients.
+- Light mode is required for the assignment prototype. Dark mode is optional
+  only after light-mode acceptance checks pass.
+
+## 4. Typography
+
+### Family
+
+Use **Manrope** for interface and marketing text, with the fallback stack:
+
+`Manrope, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+
+Use system monospace only for debugging—not for match scores or dates. Enable
+tabular numerals for countdowns, rating distributions, and aligned dates.
+
+### Scale
+
+| Style | Size / line height | Weight | Use |
+|---|---:|---:|---|
+| Display | 40 / 48 px | 700 | Landing hero only |
+| Heading 1 | 32 / 40 px | 700 | Major page title |
+| Heading 2 | 24 / 32 px | 700 | Screen section title |
+| Heading 3 | 20 / 28 px | 650 | Card group or sheet title |
+| Title | 18 / 24 px | 650 | Opportunity title |
+| Body large | 18 / 28 px | 400 | Landing lead, key explanation |
+| Body | 16 / 24 px | 400 | Default readable content |
+| Label | 14 / 20 px | 650 | Buttons, tabs, fields, chips |
+| Small | 14 / 20 px | 400 | Metadata and helper text |
+| Caption | 12 / 16 px | 600 | Overline, provenance timestamp |
+
+Rules:
+
+- Never render essential text below 14 px; 12 px is for short secondary labels.
+- Opportunity titles use sentence case and clamp to two lines on cards.
+- Avoid all caps except very short status overlines of 12 characters or fewer.
+- Use real typographic hierarchy, not repeated bold text.
+
+## 5. Spacing and layout
+
+Use a 4 px base grid. Available steps:
+
+`0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80 px`.
+
+Do not introduce intermediate spacing unless needed for an operating-system safe
+area.
+
+### Mobile reference
+
+- Artboard: 390 × 844 px reference; support 320 px minimum.
+- Horizontal gutter: 16 px.
+- App-bar height: 56 px plus safe area.
+- Bottom navigation: 64 px plus safe area.
+- Vertical screen-section gap: 32 px.
+- Card internal padding: 16 px.
+- Dense list-row padding: 12 px vertical, 16 px horizontal.
+- Sticky bottom action sits above navigation/safe area and never covers content.
+
+### Tablet and desktop
+
+- 768–1023 px: maximum app content width 720 px, centred; bottom navigation may
+  remain for prototype consistency.
+- 1024 px and above: use a 240 px left navigation rail and a content column up to
+  760 px; optional contextual rail up to 320 px. Do not stretch opportunity text
+  across the viewport.
+- Landing page: 12-column grid, 24 px gutters, 1200 px maximum container.
+
+## 6. Shape, borders, and elevation
+
+### Radius
+
+- 8 px: compact inline elements and thumbnails.
+- 12 px: fields, buttons, list cards.
+- 16 px: standard opportunity cards and panels.
+- 24 px: bottom sheets and large feature panels.
+- Full/pill: status chips only. Do not turn every control into a pill.
+
+### Borders
+
+- Default: 1 px `border-default`.
+- Selected/focus-supporting structural border: 2 px brand/focus color without
+  changing layout size.
+- Avoid internal dividers when spacing alone creates adequate grouping.
+
+### Elevation
+
+- Level 0: no shadow; default for most cards.
+- Level 1: subtle shadow for sticky action bars and floating filter/sort sheets.
+- Level 2: modal or bottom sheet only.
+- Never stack elevated cards inside elevated cards.
+
+## 7. Iconography and imagery
+
+- Use Lucide outline icons at 20 px by default, 16 px in metadata, 24 px in
+  bottom navigation.
+- Stroke width: 1.75–2 px, consistent within a screen.
+- Icon-only controls require an accessible label and a 44 px target.
+- Use icons to aid recognition, never to replace unclear labels.
+- Opportunity thumbnails are optional. Prefer a simple organiser logo or a
+  category illustration on a neutral surface. Never use arbitrary stock photos
+  just to fill a card.
+- Radar artwork uses two line widths maximum and one orange signal dot.
+
+## 8. Motion
+
+- Fast: 120 ms for press and small feedback.
+- Base: 180 ms for state change, chip/filter selection, and save feedback.
+- Slow: 260 ms for bottom sheet or screen-level reveal.
+- Easing: standard `cubic-bezier(0.2, 0, 0, 1)`; exit
+  `cubic-bezier(0.4, 0, 1, 1)`.
+- No looping scan animation, pulsing deadline, autoplay carousel, or motion that
+  suggests live AI processing when the prototype is deterministic.
+- Under `prefers-reduced-motion`, remove nonessential transforms and use near-zero
+  duration without hiding state changes.
+
+## 9. Core composition patterns
+
+### Page hierarchy
+
+1. Page title or concise greeting.
+2. Optional one-line context or control.
+3. Primary task module.
+4. Secondary sections in descending decision value.
+
+Do not lead with a decorative hero inside the signed-in app.
+
+### Card hierarchy
+
+1. Deadline state and absolute deadline.
+2. Opportunity title.
+3. Organiser + source status.
+4. Match label and up to two reasons.
+5. Category/date/location metadata.
+6. Review summary, if sufficient.
+7. Save or open action.
+
+### Progressive disclosure
+
+- Cards help users shortlist; detail pages help them decide.
+- `Why this matches` is a sheet or disclosure, not a paragraph on every card.
+- Full eligibility, review distribution, source notes, and forecast basis appear
+  on detail or secondary sheets.
+
+### Controls
+
+- One primary action per view or action region.
+- Secondary action: outlined or text button.
+- Tertiary action: text/icon only.
+- Destructive action is never adjacent to the default primary action without a
+  clear confirmation.
+- Minimum target: 44 × 44 px. Default field/button height: 44 px; large CTA 52 px.
+
+## 10. Content design
+
+### Voice
+
+- Direct: `Save and remind me`, not `Leverage smart reminders`.
+- Specific: `Checked 28 Aug 2026`, not `Recently verified`.
+- Honest: `Expected in October`, not `Coming in October` when dates are unknown.
+- Encouraging: `Two profile details would improve your matches`, not `Your
+  profile is incomplete`.
+
+### Preferred labels
+
+- `For You`, `Explore`, `Plan`, `Profile`.
+- `Why this matches`.
+- `Official source`, `Organiser verified`, `Community submitted`.
+- `Open official application`.
+- `Save`, `Saved`, `Set reminder`, `Mark as applied`.
+- `Confirmed`, `Expected`, `Dates not announced`.
+- `Ask Radar`, not `AI Opportunity Assistant` in primary navigation.
+
+### Dates and deadlines
+
+- Absolute format: `2 Sep 2026, 11:59 PM SGT`.
+- Relative urgency is secondary: `Closes in 5 days`.
+- Programme range: `12–14 Sep 2026`.
+- Always include timezone for application deadlines.
+- Never use `Tomorrow` alone or ambiguous numeric dates such as `02/09/26`.
+- For rolling deadlines say `Rolling — apply early`, with the source checked date.
+
+### Ratings and reviews
+
+- Format `4.6 · 38 reviews`, not a lone `4.6`.
+- Show `92% would recommend` only with the response count.
+- Say `Not enough reviews yet` below three reviews.
+- Do not label every review `verified`; state exactly what was verified.
+
+### Match language
+
+- Always pair `95% match` with `Strong match` and `Why this matches`.
+- Helper: `Profile fit, not chance of acceptance.`
+- Do not use `Perfect match`, `guaranteed`, or `best for you`.
+
+### Empty and error copy
+
+- Say what happened, what is preserved, and what the user can do.
+- Empty feed: `No strong matches yet. Add another interest or explore everything.`
+- Search empty: `No opportunities match all 4 filters.` Actions: `Clear filters`
+  and `Watch this search`.
+- Stale source: `We could not re-check this listing. Last confirmed 18 Aug 2026.`
+- Closed: `Applications closed 25 Aug 2026.` Offer `Find similar`.
+
+## 11. Trust and responsible AI rules
+
+- Source status and last checked date appear before or immediately after the
+  primary application action.
+- Generated summaries never replace source facts. Structured dates and
+  eligibility win in any conflict.
+- Ask Radar responses cite the opportunity cards they use and offer `View source`.
+- Never fabricate a listing, review, eligibility rule, organiser, or deadline.
+- Prototype AI responses and forecasts are labelled `Demo` in developer/demo
+  mode without cluttering the consumer UI.
+- Let users correct profile factors, hide recommendations, report stale data,
+  and clear assistant history.
+- Do not use faculty, year, nationality, disability, or financial-aid details to
+  infer competitiveness or likelihood of acceptance.
+
+## 12. Accessibility
+
+- Target WCAG 2.2 AA for text and interactive controls.
+- Visible `:focus-visible` ring: 3 px blue with 2 px canvas offset.
+- Keyboard order follows reading order; sheets trap focus and return it to the
+  opener; Escape closes dismissible overlays.
+- Every icon-only control has an accessible name.
+- Selected tabs/chips expose state programmatically.
+- Announce saved/status/reminder updates with a polite live region.
+- Error summaries use `role="alert"` and connect to invalid fields.
+- Do not rely on swipe, hover, drag, or color as the only way to act or understand.
+- Support 200% zoom and text resizing without clipped CTA labels.
+- Provide reduced-motion behavior and meaningful landmark/heading structure.
+- Review stars have text equivalents; match gauges have a label and value.
+
+## 13. Do / do not
+
+Do:
+
+- Use warm neutral canvas, white surfaces, navy actions, and one orange signal.
+- Put deadline, source, match explanation, and next action within easy reach.
+- Reuse the same opportunity card data across every discovery route.
+- Use a timeline to make confirmed and expected windows visibly different.
+- Keep mobile screens focused on one job.
+
+Do not:
+
+- Build a generic purple AI dashboard.
+- Use glass, neon glow, aurora gradients, or a floating chatbot on every screen.
+- Hide source freshness at the bottom of a long page.
+- make all metadata a colorful pill.
+- Let the bell open Forecast or let a widget open an unrelated Home screen.
+- Invent official NUS branding, partnership, live data, or predictive accuracy.

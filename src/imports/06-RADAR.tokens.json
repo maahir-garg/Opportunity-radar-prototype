@@ -1,0 +1,203 @@
+{
+  "$description": "Opportunity Radar design tokens. DTCG 2025.10-style JSON is the source of truth; 07-radar-tokens.css is the web translation.",
+  "color": {
+    "primitive": {
+      "navy": {
+        "$type": "color",
+        "950": {"$value": {"colorSpace": "srgb", "components": [0.027451, 0.101961, 0.184314], "hex": "#071A2F"}},
+        "900": {"$value": {"colorSpace": "srgb", "components": [0.043137, 0.137255, 0.25098], "hex": "#0B2340"}},
+        "800": {"$value": {"colorSpace": "srgb", "components": [0.070588, 0.207843, 0.356863], "hex": "#12355B"}}
+      },
+      "blue": {
+        "$type": "color",
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.141176, 0.32549, 0.713725], "hex": "#2453B6"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [0.909804, 0.941176, 1], "hex": "#E8F0FF"}}
+      },
+      "orange": {
+        "$type": "color",
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.721569, 0.278431, 0.094118], "hex": "#B84718"}},
+        "600": {"$value": {"colorSpace": "srgb", "components": [0.85098, 0.356863, 0.164706], "hex": "#D95B2A"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [1, 0.941176, 0.909804], "hex": "#FFF0E8"}}
+      },
+      "teal": {
+        "$type": "color",
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.031373, 0.478431, 0.407843], "hex": "#087A68"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [0.866667, 0.968627, 0.941176], "hex": "#DDF7F0"}}
+      },
+      "amber": {
+        "$type": "color",
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.478431, 0.341176, 0], "hex": "#7A5700"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [1, 0.956863, 0.8], "hex": "#FFF4CC"}}
+      },
+      "red": {
+        "$type": "color",
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.705882, 0.137255, 0.227451], "hex": "#B4233A"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [1, 0.905882, 0.921569], "hex": "#FFE7EB"}}
+      },
+      "neutral": {
+        "$type": "color",
+        "0": {"$value": {"colorSpace": "srgb", "components": [1, 1, 1], "hex": "#FFFFFF"}},
+        "25": {"$value": {"colorSpace": "srgb", "components": [0.988235, 0.988235, 0.980392], "hex": "#FCFCFA"}},
+        "50": {"$value": {"colorSpace": "srgb", "components": [0.964706, 0.968627, 0.956863], "hex": "#F6F7F4"}},
+        "100": {"$value": {"colorSpace": "srgb", "components": [0.92549, 0.937255, 0.917647], "hex": "#ECEFEA"}},
+        "200": {"$value": {"colorSpace": "srgb", "components": [0.866667, 0.886275, 0.866667], "hex": "#DDE2DD"}},
+        "300": {"$value": {"colorSpace": "srgb", "components": [0.776471, 0.807843, 0.784314], "hex": "#C6CEC8"}},
+        "500": {"$value": {"colorSpace": "srgb", "components": [0.407843, 0.454902, 0.431373], "hex": "#68746E"}},
+        "600": {"$value": {"colorSpace": "srgb", "components": [0.313725, 0.360784, 0.341176], "hex": "#505C57"}},
+        "700": {"$value": {"colorSpace": "srgb", "components": [0.207843, 0.254902, 0.235294], "hex": "#35413C"}},
+        "900": {"$value": {"colorSpace": "srgb", "components": [0.082353, 0.129412, 0.113725], "hex": "#15211D"}}
+      }
+    },
+    "semantic": {
+      "$type": "color",
+      "canvas": {"$value": "{color.primitive.neutral.50}"},
+      "surface": {"$value": "{color.primitive.neutral.0}"},
+      "surfaceQuiet": {"$value": "{color.primitive.neutral.25}"},
+      "surfaceSubdued": {"$value": "{color.primitive.neutral.100}"},
+      "surfaceAccent": {"$value": "{color.primitive.orange.100}"},
+      "textPrimary": {"$value": "{color.primitive.navy.950}"},
+      "textBody": {"$value": "{color.primitive.neutral.900}"},
+      "textSecondary": {"$value": "{color.primitive.neutral.600}"},
+      "textDisabled": {"$value": "{color.primitive.neutral.500}"},
+      "textInverse": {"$value": "{color.primitive.neutral.0}"},
+      "textLink": {"$value": "{color.primitive.blue.700}"},
+      "borderDefault": {"$value": "{color.primitive.neutral.200}"},
+      "borderStrong": {"$value": "{color.primitive.neutral.300}"},
+      "focus": {"$value": "{color.primitive.blue.700}"},
+      "actionPrimary": {"$value": "{color.primitive.navy.900}"},
+      "actionPrimaryHover": {"$value": "{color.primitive.navy.800}"},
+      "actionOnPrimary": {"$value": "{color.primitive.neutral.0}"},
+      "signal": {"$value": "{color.primitive.orange.600}"},
+      "signalText": {"$value": "{color.primitive.orange.700}"},
+      "matchStrongText": {"$value": "{color.primitive.teal.700}"},
+      "matchStrongSurface": {"$value": "{color.primitive.teal.100}"},
+      "infoText": {"$value": "{color.primitive.blue.700}"},
+      "infoSurface": {"$value": "{color.primitive.blue.100}"},
+      "warningText": {"$value": "{color.primitive.amber.700}"},
+      "warningSurface": {"$value": "{color.primitive.amber.100}"},
+      "errorText": {"$value": "{color.primitive.red.700}"},
+      "errorSurface": {"$value": "{color.primitive.red.100}"}
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": {"$value": ["Manrope", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"]}
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {"$value": 400},
+      "semibold": {"$value": 600},
+      "bold": {"$value": 700}
+    },
+    "size": {
+      "$type": "dimension",
+      "caption": {"$value": {"value": 12, "unit": "px"}},
+      "small": {"$value": {"value": 14, "unit": "px"}},
+      "body": {"$value": {"value": 16, "unit": "px"}},
+      "bodyLarge": {"$value": {"value": 18, "unit": "px"}},
+      "heading3": {"$value": {"value": 20, "unit": "px"}},
+      "heading2": {"$value": {"value": 24, "unit": "px"}},
+      "heading1": {"$value": {"value": 32, "unit": "px"}},
+      "display": {"$value": {"value": 40, "unit": "px"}}
+    },
+    "lineHeight": {
+      "$type": "dimension",
+      "caption": {"$value": {"value": 16, "unit": "px"}},
+      "small": {"$value": {"value": 20, "unit": "px"}},
+      "body": {"$value": {"value": 24, "unit": "px"}},
+      "bodyLarge": {"$value": {"value": 28, "unit": "px"}},
+      "heading3": {"$value": {"value": 28, "unit": "px"}},
+      "heading2": {"$value": {"value": 32, "unit": "px"}},
+      "heading1": {"$value": {"value": 40, "unit": "px"}},
+      "display": {"$value": {"value": 48, "unit": "px"}}
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "0": {"$value": {"value": 0, "unit": "px"}},
+    "1": {"$value": {"value": 4, "unit": "px"}},
+    "2": {"$value": {"value": 8, "unit": "px"}},
+    "3": {"$value": {"value": 12, "unit": "px"}},
+    "4": {"$value": {"value": 16, "unit": "px"}},
+    "5": {"$value": {"value": 20, "unit": "px"}},
+    "6": {"$value": {"value": 24, "unit": "px"}},
+    "8": {"$value": {"value": 32, "unit": "px"}},
+    "10": {"$value": {"value": 40, "unit": "px"}},
+    "12": {"$value": {"value": 48, "unit": "px"}},
+    "16": {"$value": {"value": 64, "unit": "px"}},
+    "20": {"$value": {"value": 80, "unit": "px"}}
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {"$value": {"value": 0, "unit": "px"}},
+    "small": {"$value": {"value": 8, "unit": "px"}},
+    "medium": {"$value": {"value": 12, "unit": "px"}},
+    "large": {"$value": {"value": 16, "unit": "px"}},
+    "sheet": {"$value": {"value": 24, "unit": "px"}},
+    "full": {"$value": {"value": 999, "unit": "px"}}
+  },
+  "size": {
+    "$type": "dimension",
+    "tapMinimum": {"$value": {"value": 44, "unit": "px"}},
+    "controlCompact": {"$value": {"value": 36, "unit": "px"}},
+    "controlDefault": {"$value": {"value": 44, "unit": "px"}},
+    "controlLarge": {"$value": {"value": 52, "unit": "px"}},
+    "iconSmall": {"$value": {"value": 16, "unit": "px"}},
+    "iconDefault": {"$value": {"value": 20, "unit": "px"}},
+    "iconNavigation": {"$value": {"value": 24, "unit": "px"}},
+    "mobileGutter": {"$value": {"value": 16, "unit": "px"}},
+    "contentAppMax": {"$value": {"value": 760, "unit": "px"}},
+    "contentLandingMax": {"$value": {"value": 1200, "unit": "px"}}
+  },
+  "breakpoint": {
+    "$type": "dimension",
+    "mobileMinimum": {"$value": {"value": 320, "unit": "px"}},
+    "tablet": {"$value": {"value": 768, "unit": "px"}},
+    "desktop": {"$value": {"value": 1024, "unit": "px"}},
+    "wide": {"$value": {"value": 1440, "unit": "px"}}
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "instant": {"$value": {"value": 1, "unit": "ms"}},
+      "fast": {"$value": {"value": 120, "unit": "ms"}},
+      "base": {"$value": {"value": 180, "unit": "ms"}},
+      "slow": {"$value": {"value": 260, "unit": "ms"}}
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {"$value": [0.2, 0, 0, 1]},
+      "exit": {"$value": [0.4, 0, 1, 1]}
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "level1": {
+      "$value": {
+        "color": {"colorSpace": "srgb", "components": [0.027451, 0.101961, 0.184314], "alpha": 0.08, "hex": "#071A2F14"},
+        "offsetX": {"value": 0, "unit": "px"},
+        "offsetY": {"value": 4, "unit": "px"},
+        "blur": {"value": 16, "unit": "px"},
+        "spread": {"value": 0, "unit": "px"}
+      }
+    },
+    "level2": {
+      "$value": {
+        "color": {"colorSpace": "srgb", "components": [0.027451, 0.101961, 0.184314], "alpha": 0.14, "hex": "#071A2F24"},
+        "offsetX": {"value": 0, "unit": "px"},
+        "offsetY": {"value": 12, "unit": "px"},
+        "blur": {"value": 32, "unit": "px"},
+        "spread": {"value": -4, "unit": "px"}
+      }
+    }
+  },
+  "layer": {
+    "$type": "number",
+    "base": {"$value": 0},
+    "sticky": {"$value": 10},
+    "navigation": {"$value": 20},
+    "sheet": {"$value": 40},
+    "toast": {"$value": 60}
+  }
+}

@@ -1,0 +1,137 @@
+# Opportunity Radar — Definition of done
+
+Use this checklist before calling the prototype complete. If an item is not met,
+report it explicitly rather than silently weakening the requirement.
+
+## A. CS3216 Assignment 1 fit
+
+- [ ] Product scope is expressed as at most three primary goals.
+- [ ] The implemented MVP has fewer than ten meaningful product features.
+- [ ] Every implemented feature traces to G1, G2, or G3 in the product spec.
+- [ ] The high-fidelity prototype is interactive and can be tested without the
+      facilitator manually swapping screens.
+- [ ] Onboarding, first use, and the prototype sign-in choice are represented.
+- [ ] Three core happy paths are ready for a demo under five minutes.
+- [ ] The same design system can style the required public landing page.
+- [ ] Prototype screens can be exported/captured cleanly for Draft 3 / Final.
+- [ ] The team preserves its earlier low-fidelity Draft 1 artifacts separately;
+      these polished files do not overwrite them.
+
+## B. Core journeys
+
+- [ ] Flow 1 works: Welcome → Profile setup → For You → Why Match → Detail.
+- [ ] Flow 2 works: Detail → Save → Reminder → official handoff simulation →
+      Mark applied → Applied tab in Plan.
+- [ ] Flow 3 works: For You → 30-day Radar → Expected preview → Watch → Plan →
+      mock confirmation notification → exact Detail.
+- [ ] Alternate Ask Radar flow returns canonical catalogue cards and opens normal
+      Detail.
+- [ ] Back navigation returns to prior scroll/filter state.
+- [ ] Bell opens Notifications, never Forecast.
+- [ ] Widget, if built, deep-links to the exact represented opportunity.
+
+## C. Functional prototype behavior
+
+- [ ] Search matches title, organiser, category, and tags.
+- [ ] Filter selection, active-filter visibility, result count, sort, and clear
+      all work.
+- [ ] Save/unsave persists during the session; local persistence is preferred.
+- [ ] Status changes among Saved, Preparing, Applied, and Past work and can be
+      undone safely.
+- [ ] Reminder selection persists and is shown on the relevant card/detail.
+- [ ] Notification items deep-link to the correct object.
+- [ ] Ask Radar uses deterministic scenarios and preserves structured facts.
+- [ ] The external application interstitial names the destination and supports a
+      failed-link state.
+
+## D. Content and consistency
+
+- [ ] `05-MOCK-DATA.json` is the source for every title, organiser, deadline,
+      rating count, match reason, and progress state.
+- [ ] No 2024 dates or inconsistent review counts remain from the original sketch.
+- [ ] Every opportunity uses one canonical category ID.
+- [ ] Absolute deadlines include date, time, and SGT; relative urgency is secondary.
+- [ ] Match score is paired with label, Why Match, factors, and the acceptance-
+      likelihood disclaimer.
+- [ ] Known eligibility blockers override a superficially high match.
+- [ ] Confirmed and Expected forecast states are labelled in every representation.
+- [ ] Expected items state their basis and what remains unknown.
+- [ ] Review aggregates show count; fewer than three reviews use the sparse state.
+- [ ] UI copy does not claim live data, institutional partnership, or predictive
+      accuracy.
+
+## E. Trust and source integrity
+
+- [ ] Detail shows organiser, source status, destination domain, and last checked
+      date near the decision/action area.
+- [ ] `Official source` is not confused with Radar being an official NUS product.
+- [ ] Stale and source-error states retain the last known date and a report action.
+- [ ] Ask Radar cannot invent a listing, eligibility condition, review, or deadline.
+- [ ] Forecast/demo limitations are clear in the prototype or demo narration.
+- [ ] The app and landing page say `Student-built for NUS students — not an
+      official NUS service`.
+- [ ] No NUS crest, seal, or unapproved official wordmark is used.
+
+## F. Component system
+
+- [ ] Components use semantic custom properties from `07-radar-tokens.css`; no
+      raw hex values or arbitrary spacing appear inside components.
+- [ ] OpportunityCard variants use the same object and preserve facts.
+- [ ] Button, chip, field, tab, card, sheet, review, match, source, deadline,
+      forecast, and feedback components have all specified states.
+- [ ] One primary CTA appears in each action region.
+- [ ] No nested elevated cards, excessive pills, glassmorphism, decorative
+      gradients, or generic floating chatbot are present.
+- [ ] Radar arcs/dots are restrained to signature moments.
+
+## G. Responsive quality
+
+- [ ] No horizontal clipping at 320 px.
+- [ ] Primary mobile review completed at 390 × 844 px.
+- [ ] Tablet review completed at 768 px.
+- [ ] Desktop review completed at 1440 px with a navigation rail and bounded text
+      column rather than stretched mobile content.
+- [ ] Sticky actions and navigation never cover content or operating-system safe
+      areas.
+- [ ] Long two-line titles, long organiser names, and missing thumbnails do not
+      break card geometry.
+
+## H. Accessibility
+
+- [ ] Text and controls meet WCAG AA contrast against their actual backgrounds.
+- [ ] Every interactive target is at least 44 × 44 px on touch layouts.
+- [ ] Keyboard users can reach and activate every action in a logical order.
+- [ ] Visible focus uses the design-system focus ring and is never clipped.
+- [ ] Sheets/dialogs manage focus, close with Escape when dismissible, and return
+      focus to the opener.
+- [ ] Icons have visible labels or accessible names; decorative icons are hidden.
+- [ ] Selection/status is available in text/ARIA, not color alone.
+- [ ] Save, status, reminder, search-count, and assistant updates are announced
+      appropriately without making the whole chat log live.
+- [ ] 200% zoom/text resizing does not clip essential content or CTA labels.
+- [ ] Reduced-motion preference removes nonessential transforms and looping motion.
+
+## I. Required state coverage
+
+- [ ] Default and loading states.
+- [ ] Empty feed, empty search, and empty Plan tab.
+- [ ] Generic/network error with retry and preserved input.
+- [ ] Offline/cached state.
+- [ ] Open, closing soon, closed, full, and cancelled opportunity states.
+- [ ] Official, organiser verified, community submitted, stale, and needs-review
+      source states.
+- [ ] Saved, preparing, applied, completed, and dismissed user states.
+- [ ] Confirmed, Expected, and Watched forecast states.
+- [ ] Sufficient, sparse, and no-review states.
+- [ ] Notification permission granted and denied states.
+- [ ] Ask Radar results, no-results/refine, loading, reset, and error states.
+
+## J. Final visual review
+
+- [ ] Hierarchy answers deadline → title → organiser/source → fit → action in a
+      quick scan.
+- [ ] Navy is the decisive action color; orange remains a sparse signal accent.
+- [ ] Essential text is 14 px or larger and opportunity titles are readable.
+- [ ] Exact deadlines, metadata, and long content align cleanly.
+- [ ] The product feels like a calm decision tool rather than a dense job board.
+

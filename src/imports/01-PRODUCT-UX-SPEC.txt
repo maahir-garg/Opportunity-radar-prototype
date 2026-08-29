@@ -1,0 +1,268 @@
+# Opportunity Radar — Product and UX specification
+
+Version: 1.0  
+Status: Prototype direction; user-research findings are not yet complete  
+Primary platform: Mobile-first responsive web app / PWA  
+Primary audience: Time-constrained NUS undergraduates, initially Years 2–3
+
+## Product statement
+
+NUS Opportunity Radar helps students find the right opportunities before they
+close. It brings internships, research, exchanges, competitions, hackathons,
+entrepreneurship programmes, volunteering, talks, and grants into one consistent
+experience; recommends a manageable set based on a student's profile and goals;
+shows the evidence needed to judge fit and trustworthiness; and turns saved
+opportunities into a simple deadline plan.
+
+## Positioning
+
+Radar is not another application portal and should not pretend to replace
+official NUS or organiser sources. It is the **decision and action layer** above
+those sources.
+
+Product promise: **Know what fits, what it takes, and what to do next.**
+
+## Current problem hypotheses
+
+These are assumptions until the team completes and documents interviews:
+
+1. Students discover opportunities through disconnected email, Telegram,
+   social, university, faculty, and organiser channels.
+2. High-volume channels make personally relevant items hard to identify.
+3. Students delay or miss applications because deadlines and next actions are
+   spread across different places.
+4. Students lack credible, comparable context about eligibility, commitment,
+   organiser quality, and past student experience.
+
+The prototype should help test these assumptions; it must not present them as
+already validated findings.
+
+## Three primary goals
+
+G1 — **Discover relevant opportunities quickly.** Centralise discovery and
+reduce noise through profile-aware recommendations, search, and filters.
+
+G2 — **Decide with confidence.** Make fit, provenance, freshness, eligibility,
+commitment, and student experience easy to inspect.
+
+G3 — **Act before the deadline.** Connect saving to a clear status, next action,
+reminder, and 30-day view.
+
+Trust is also a system-wide quality bar: every surface that makes a recommendation
+or deadline claim must explain its source.
+
+## MVP feature set
+
+The ten original ideas are consolidated into six meaningful product features so
+the prototype remains focused and testable.
+
+F1 — **Profile and preferences**
+
+- Fast first-use setup: year, faculty/school, up to three interests, desired
+  outcomes, and optional eligibility facts.
+- Editable at any time.
+- Profile factors used in recommendations are visible and removable.
+
+F2 — **Personalised discovery**
+
+- `For You` feed plus `Explore` search, category filters, `Eligible for me`, and
+  `Closing soon`.
+- One shared opportunity catalogue and taxonomy.
+- Users can hide a recommendation or say why it is not relevant.
+
+F3 — **Explainable match**
+
+- Compact score/label on cards and detail.
+- `Why this matches` shows satisfied factors, unknown factors, and possible
+  blockers.
+- The score is a ranking aid based on structured prototype rules, not a
+  probability of acceptance or success.
+
+F4 — **Decision-ready opportunity detail**
+
+- Standardised summary, organiser, source, last checked, application deadline,
+  programme dates, eligibility, commitment, location/mode, and official link.
+- Structured student reviews with cohort context and review count.
+- Report outdated or incorrect information.
+
+F5 — **Plan, forecast, and reminders**
+
+- Save, set a status, record one next action, and choose reminder timing.
+- Plan tabs: Saved, Preparing, Applied, Past.
+- 30-day Radar separates currently confirmed openings/deadlines from expected
+  seasonal windows.
+
+F6 — **Ask Radar**
+
+- Natural-language, goal-based discovery inside Explore.
+- Returns catalogue-backed result cards with match reasons and source links.
+- Uses deterministic mock replies in the prototype and never invents eligibility
+  or deadline facts.
+
+Stretch S1 — **Lock-screen widget**
+
+- Shows one opted-in saved opportunity or daily best match.
+- Deep-links directly to that opportunity, not to Home.
+- Requires notification/widget permissions and must have an unavailable state.
+- Do not build until the MVP journeys work.
+
+## Goal-to-feature traceability
+
+| Goal | Supporting features | Main surfaces | Testable outcome |
+|---|---|---|---|
+| G1 Discover | F1, F2, F3, F6 | Onboarding, For You, Explore, Ask Radar | Student finds one suitable item and can explain why it appeared |
+| G2 Decide | F3, F4 | Opportunity detail, Why Match, Reviews | Student identifies source, eligibility, commitment, deadline, and one trust signal without help |
+| G3 Act | F4, F5 | Detail, reminder sheet, Plan, Radar forecast | Student saves an item, sets a reminder/next action, and later finds it in the correct status |
+
+## Canonical information architecture
+
+Bottom navigation has four destinations:
+
+1. **For You** — recommended and closing-soon opportunities; forecast preview.
+2. **Explore** — conventional search, categories, filters, and Ask Radar.
+3. **Plan** — saved/application states, next actions, reminders, and 30-day view.
+4. **Profile** — preferences, eligibility facts, notifications, privacy, About.
+
+The top-bar bell always opens the notification inbox. Opportunity detail, Why
+Match, filters, reminder setup, reviews, and Ask Radar are child surfaces.
+
+## Canonical category taxonomy
+
+Use these IDs and labels everywhere; do not create local category lists:
+
+| ID | Label | Lucide icon |
+|---|---|---|
+| `career` | Career & internships | `briefcase-business` |
+| `research` | Research | `flask-conical` |
+| `venture` | Entrepreneurship | `rocket` |
+| `competition` | Competitions & hackathons | `trophy` |
+| `global` | Global & exchange | `globe-2` |
+| `impact` | Volunteering & impact | `heart-handshake` |
+| `event` | Talks & workshops | `presentation` |
+| `funding` | Scholarships & grants | `badge-dollar-sign` |
+
+## Opportunity truth model
+
+Keep these state families separate in data and UI.
+
+Opportunity availability:
+
+- `upcoming`, `open`, `closingSoon`, `closed`, `full`, `cancelled`.
+
+User progress:
+
+- `none`, `saved`, `preparing`, `applied`, `completed`, `dismissed`.
+
+Forecast status:
+
+- `confirmed` — tied to a current official listing or date.
+- `expected` — a possible seasonal window based on stated historical evidence.
+- `watching` — user requested an alert; not a prediction confidence.
+
+Source status:
+
+- `official`, `organiserVerified`, `communitySubmitted`, `needsReview`.
+
+Never infer user progress from opportunity availability. Never treat an expected
+forecast item as an open opportunity.
+
+## Required opportunity fields
+
+- Stable ID, title, organiser, category ID, tags, short summary.
+- Source status, source label, source URL, last checked timestamp.
+- Availability state, application deadline with timezone, programme dates.
+- Location and mode.
+- Eligibility requirements and unknown/conditional requirements.
+- Estimated time commitment with provenance.
+- Match score/label, satisfied reasons, missing facts, and blockers.
+- Rating average, count, recommendation percentage, and structured reviews.
+- User progress, next action, reminder date, and last user update.
+- Forecast status and basis, if applicable.
+
+## Match model for the prototype
+
+Use a deterministic weighted demonstration model only:
+
+- Eligibility satisfied: 40 points.
+- Interest/category alignment: 25 points.
+- Goal alignment: 20 points.
+- Timing/availability alignment: 10 points.
+- Location/mode preference: 5 points.
+
+Display the numeric value only with a plain-language label:
+
+- 85–100: `Strong match`
+- 70–84: `Good match`
+- 50–69: `Possible match`
+- Below 50: do not place in `Top matches` unless the user explicitly searches.
+
+If a hard eligibility blocker is known, show `Eligibility issue` instead of a
+high match label regardless of the interest score. `Why this matches` must list
+the factors used. The UI must say the score measures profile fit, not admission
+likelihood.
+
+## Forecast model for the prototype
+
+The forecast is a planning surface, not generative fortune-telling.
+
+- Confirmed items show exact current dates and official source.
+- Expected items show an approximate window, the previous occurrence used as
+  evidence, and `Dates not announced`.
+- Never mix confirmed and expected marks without labels and a legend.
+- Never show unexplained `High / Medium / Low` values.
+- A user can watch an expected item and receive a mock confirmation notice.
+
+## Review model
+
+- Reviews are written by NUS students in the concept; label whether attendance
+  was verified or only student identity was verified.
+- Show reviewer context useful for relevance: year, faculty/school, participation
+  year, and optional anonymous name.
+- Structured fields: overall rating, would recommend, commitment accuracy,
+  organiser communication, best for, and free-text note.
+- Always show review count and freshness. A sparse state must say `Not enough
+  reviews yet`; never imply confidence from one review.
+- Include report and moderation states. Do not expose personal contact details.
+
+## External application handoff
+
+Radar does not submit applications in the MVP.
+
+1. `Open official application` shows the destination domain and leaves Radar.
+2. Returning users see `Did you apply?` with `Mark as applied` and `Not yet`.
+3. The user can mark applied manually and undo it.
+4. A failed or unavailable link shows the last checked date and report action.
+
+## Acquisition and feasibility assumptions
+
+Potential distribution: student societies, faculty channels, NUS Enterprise/
+CFG/GRO programme owners, orientation, and shareable opportunity links. The
+landing page should collect interest without claiming institutional partnership.
+
+The real product would need current structured data, source permission, provider
+verification, moderation, privacy consent, and a reliable update workflow. For
+the assignment prototype, use the supplied fictional data and label it as demo
+content. Never scrape or claim a live integration.
+
+## Out of scope
+
+- Hosting complete applications inside Radar.
+- Resume or application writing.
+- Open social networking, direct messaging, or follower feeds.
+- Automated acceptance-likelihood or competitiveness predictions.
+- Unmoderated reviews.
+- Expansion beyond NUS.
+- A live LLM or live opportunity crawler.
+- The OS widget before the core prototype is complete.
+
+## Prototype research questions
+
+Use the prototype to observe, not merely ask whether users “like” it:
+
+1. Can students identify why a recommendation fits them?
+2. Which trust evidence do they inspect before deciding?
+3. Do they understand `Expected` versus `Confirmed` in the forecast?
+4. Can they save, choose a next action, and later retrieve the item unaided?
+5. Is conventional search or Ask Radar the more natural starting point?
+6. Does the match percentage clarify relevance or create false confidence?
+

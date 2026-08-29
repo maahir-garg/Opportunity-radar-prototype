@@ -1,0 +1,181 @@
+/*
+ * Opportunity Radar web tokens
+ * Source of truth: 06-RADAR.tokens.json
+ * Load Manrope separately; this file intentionally has no network dependency.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Primitive color */
+  --radar-navy-950: #071a2f;
+  --radar-navy-900: #0b2340;
+  --radar-navy-800: #12355b;
+  --radar-blue-700: #2453b6;
+  --radar-blue-100: #e8f0ff;
+  --radar-orange-700: #b84718;
+  --radar-orange-600: #d95b2a;
+  --radar-orange-100: #fff0e8;
+  --radar-teal-700: #087a68;
+  --radar-teal-100: #ddf7f0;
+  --radar-amber-700: #7a5700;
+  --radar-amber-100: #fff4cc;
+  --radar-red-700: #b4233a;
+  --radar-red-100: #ffe7eb;
+  --radar-neutral-0: #ffffff;
+  --radar-neutral-25: #fcfcfa;
+  --radar-neutral-50: #f6f7f4;
+  --radar-neutral-100: #ecefea;
+  --radar-neutral-200: #dde2dd;
+  --radar-neutral-300: #c6cec8;
+  --radar-neutral-500: #68746e;
+  --radar-neutral-600: #505c57;
+  --radar-neutral-700: #35413c;
+  --radar-neutral-900: #15211d;
+
+  /* Semantic color */
+  --radar-color-canvas: var(--radar-neutral-50);
+  --radar-color-surface: var(--radar-neutral-0);
+  --radar-color-surface-quiet: var(--radar-neutral-25);
+  --radar-color-surface-subdued: var(--radar-neutral-100);
+  --radar-color-surface-accent: var(--radar-orange-100);
+  --radar-color-text-primary: var(--radar-navy-950);
+  --radar-color-text-body: var(--radar-neutral-900);
+  --radar-color-text-secondary: var(--radar-neutral-600);
+  --radar-color-text-disabled: var(--radar-neutral-500);
+  --radar-color-text-inverse: var(--radar-neutral-0);
+  --radar-color-text-link: var(--radar-blue-700);
+  --radar-color-border: var(--radar-neutral-200);
+  --radar-color-border-strong: var(--radar-neutral-300);
+  --radar-color-focus: var(--radar-blue-700);
+  --radar-color-action-primary: var(--radar-navy-900);
+  --radar-color-action-primary-hover: var(--radar-navy-800);
+  --radar-color-action-on-primary: var(--radar-neutral-0);
+  --radar-color-signal: var(--radar-orange-600);
+  --radar-color-signal-text: var(--radar-orange-700);
+  --radar-color-match-text: var(--radar-teal-700);
+  --radar-color-match-surface: var(--radar-teal-100);
+  --radar-color-info-text: var(--radar-blue-700);
+  --radar-color-info-surface: var(--radar-blue-100);
+  --radar-color-warning-text: var(--radar-amber-700);
+  --radar-color-warning-surface: var(--radar-amber-100);
+  --radar-color-error-text: var(--radar-red-700);
+  --radar-color-error-surface: var(--radar-red-100);
+
+  /* Typography */
+  --radar-font-sans: Manrope, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --radar-font-weight-regular: 400;
+  --radar-font-weight-semibold: 600;
+  --radar-font-weight-bold: 700;
+  --radar-font-size-caption: 0.75rem;
+  --radar-font-size-small: 0.875rem;
+  --radar-font-size-body: 1rem;
+  --radar-font-size-body-large: 1.125rem;
+  --radar-font-size-heading-3: 1.25rem;
+  --radar-font-size-heading-2: 1.5rem;
+  --radar-font-size-heading-1: 2rem;
+  --radar-font-size-display: 2.5rem;
+  --radar-line-height-caption: 1rem;
+  --radar-line-height-small: 1.25rem;
+  --radar-line-height-body: 1.5rem;
+  --radar-line-height-body-large: 1.75rem;
+  --radar-line-height-heading-3: 1.75rem;
+  --radar-line-height-heading-2: 2rem;
+  --radar-line-height-heading-1: 2.5rem;
+  --radar-line-height-display: 3rem;
+
+  /* Spacing */
+  --radar-space-0: 0;
+  --radar-space-1: 0.25rem;
+  --radar-space-2: 0.5rem;
+  --radar-space-3: 0.75rem;
+  --radar-space-4: 1rem;
+  --radar-space-5: 1.25rem;
+  --radar-space-6: 1.5rem;
+  --radar-space-8: 2rem;
+  --radar-space-10: 2.5rem;
+  --radar-space-12: 3rem;
+  --radar-space-16: 4rem;
+  --radar-space-20: 5rem;
+
+  /* Shape and size */
+  --radar-radius-none: 0;
+  --radar-radius-small: 0.5rem;
+  --radar-radius-medium: 0.75rem;
+  --radar-radius-large: 1rem;
+  --radar-radius-sheet: 1.5rem;
+  --radar-radius-full: 999px;
+  --radar-size-tap-minimum: 2.75rem;
+  --radar-size-control-compact: 2.25rem;
+  --radar-size-control-default: 2.75rem;
+  --radar-size-control-large: 3.25rem;
+  --radar-size-icon-small: 1rem;
+  --radar-size-icon-default: 1.25rem;
+  --radar-size-icon-navigation: 1.5rem;
+  --radar-size-mobile-gutter: 1rem;
+  --radar-size-content-app-max: 47.5rem;
+  --radar-size-content-landing-max: 75rem;
+
+  /* Reference breakpoints; CSS custom properties cannot be used in media queries. */
+  --radar-breakpoint-mobile-minimum: 320px;
+  --radar-breakpoint-tablet: 768px;
+  --radar-breakpoint-desktop: 1024px;
+  --radar-breakpoint-wide: 1440px;
+
+  /* Motion and elevation */
+  --radar-duration-instant: 1ms;
+  --radar-duration-fast: 120ms;
+  --radar-duration-base: 180ms;
+  --radar-duration-slow: 260ms;
+  --radar-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --radar-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --radar-shadow-level-0: none;
+  --radar-shadow-level-1: 0 4px 16px rgb(7 26 47 / 8%);
+  --radar-shadow-level-2: 0 12px 32px -4px rgb(7 26 47 / 14%);
+
+  /* Layers */
+  --radar-layer-base: 0;
+  --radar-layer-sticky: 10;
+  --radar-layer-navigation: 20;
+  --radar-layer-sheet: 40;
+  --radar-layer-toast: 60;
+
+  /* Focus */
+  --radar-focus-ring: 0 0 0 3px var(--radar-color-focus);
+  --radar-focus-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --radar-duration-fast: 1ms;
+    --radar-duration-base: 1ms;
+    --radar-duration-slow: 1ms;
+  }
+}
+
+/* Optional baseline scope for a prototype. Components should still consume tokens. */
+.radar-app {
+  min-width: var(--radar-breakpoint-mobile-minimum);
+  color: var(--radar-color-text-body);
+  background: var(--radar-color-canvas);
+  font-family: var(--radar-font-sans);
+  font-size: var(--radar-font-size-body);
+  line-height: var(--radar-line-height-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.radar-app *,
+.radar-app *::before,
+.radar-app *::after {
+  box-sizing: border-box;
+}
+
+.radar-app :focus-visible {
+  outline: 3px solid var(--radar-color-focus);
+  outline-offset: var(--radar-focus-offset);
+}
+
+.radar-tabular-numbers {
+  font-variant-numeric: tabular-nums;
+}

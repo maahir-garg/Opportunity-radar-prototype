@@ -1,0 +1,366 @@
+# Radar component contracts
+
+All components consume semantic tokens and canonical objects from the product
+spec. Components must expose real state through text/ARIA, not only appearance.
+
+## C01 AppShell
+
+Purpose: Provide consistent safe areas, navigation, content width, and transient
+feedback.
+
+Anatomy: top bar; scrollable main landmark; bottom navigation or desktop rail;
+toast/live region; optional sticky action region.
+
+Rules:
+
+- Mobile content has 16 px gutters and enough bottom padding to clear navigation.
+- Desktop swaps bottom navigation for a left rail without changing destination
+  names or information architecture.
+- Do not place the main content inside a decorative outer card.
+- Loading navigation must not shift screen geometry.
+
+States: default, offline banner, toast, modal/sheet open.
+
+Accessibility: one `main`; labelled navigation; skip link on desktop; live region
+for save/reminder/status feedback.
+
+Acceptance: no content is hidden under safe areas, sticky actions, or navigation
+at 320, 390, 768, and 1440 px.
+
+## C02 TopBar
+
+Purpose: Orient the user and expose contextual actions.
+
+Variants:
+
+- Root: short brand/page label, notification bell, optional avatar.
+- Child: back button, screen title, up to two contextual actions.
+
+Rules:
+
+- The bell always opens Notifications and shows an unread dot/count if needed.
+- Forecast uses a labelled link/card, never the bell.
+- Titles truncate once; opportunity detail may use a generic `Opportunity` title
+  while the full title appears in content.
+
+States: default, unread, scrolled divider.
+
+Accessibility: back and icon actions have labels; 44 px targets.
+
+## C03 BottomNavigation / NavigationRail
+
+Destinations: For You, Explore, Plan, Profile.
+
+Anatomy: Lucide icon; visible label; selected indicator.
+
+Rules:
+
+- Exactly four destinations.
+- Selected state uses navy + an indicator; do not rely on icon fill alone.
+- Saved opportunities live in Plan, so there is no separate Saved destination.
+- Preserve each root destination's last scroll/filter state in the prototype.
+
+Accessibility: `aria-current="page"`; logical order; labels always visible.
+
+## C04 Button
+
+Variants: primary, secondary, tertiary, destructive, icon-only.  
+Sizes: default 44 px, large 52 px; compact 36 px only for non-primary desktop use.
+
+States: default, hover, pressed, focus-visible, loading, disabled.
+
+Rules:
+
+- One primary action per action group.
+- Loading preserves width and retains an accessible name.
+- Icon-only buttons are for familiar actions only and still have 44 px targets.
+- Disabled actions explain why nearby when the reason is not obvious.
+
+## C05 SearchField
+
+Purpose: Search titles, organisers, categories, and tags.
+
+Anatomy: search icon; text input; clear action when non-empty; optional filter
+button beside, not inside, the field.
+
+States: empty, focused, typing, populated, loading suggestions, no suggestions,
+error.
+
+Behavior:
+
+- Enter submits conventional search.
+- `Ask Radar` is a separately labelled adjacent/secondary action.
+- Recent searches appear only after interaction, not as permanent filler.
+- Clear restores the unfiltered catalogue while preserving root navigation state.
+
+Accessibility: real search input/landmark, explicit label, clear button label,
+results count announced politely.
+
+## C06 FilterChip and FilterSheet
+
+Filter chips: category, Closing soon, Eligible for me, Mode, Commitment.  
+Sort: Relevance, Deadline soonest, Recently checked, Rating.
+
+Rules:
+
+- A chip changes one visible filter; the full sheet supports multiple values.
+- Display selected count on `Filters (3)`; provide `Clear all`.
+- Sheet action says `Show 12 opportunities`, not `Apply`.
+- Never hide active filters after the sheet closes.
+
+States: unselected, selected, focus, disabled; sheet default, dirty, zero results.
+
+Accessibility: chips are buttons with `aria-pressed`; sheet is a labelled dialog;
+result count updates are announced.
+
+## C07 OpportunityCard
+
+Purpose: Let users compare and shortlist one canonical opportunity.
+
+Variants:
+
+- `featured`: For You; optional thumbnail and up to two match reasons.
+- `list`: Explore and Plan; dense horizontal/stacked layout.
+- `compact`: Ask Radar and notification result.
+- `widget`: stretch channel; minimum facts only.
+
+Required data: ID, deadline/availability, title, organiser, source status,
+category, match label/score or eligibility issue, user progress.
+
+Optional data: thumbnail/logo, programme date, location/mode, rating, next action.
+
+Mobile anatomy order:
+
+1. Availability/deadline line.
+2. Title (two-line maximum).
+3. Organiser and source status.
+4. Match indicator with `Why` action in featured/compact variants.
+5. Category/date/location metadata.
+6. Rating if review threshold is met.
+7. Save control or status/next action.
+
+User actions: open detail; save/unsave; open Why Match; open next action in Plan.
+
+States: default, pressed/focus, saved, preparing, applied, closed, cancelled,
+source-stale, loading skeleton, data-error.
+
+Rules:
+
+- The whole title/body region may open detail; nested actions remain separate.
+- Do not change copy, rating count, deadline, or organiser across variants.
+- Closed/cancelled cards remain readable and offer `Find similar`, not a dead CTA.
+- Never nest the card inside another visual card.
+
+Accessibility: card has a descriptive heading; nested action names include the
+opportunity title; metadata uses text, not icon-only meaning.
+
+Acceptance: the same fixture renders consistently in every variant; card remains
+legible at 320 px and with a two-line title.
+
+## C08 MatchIndicator and WhyMatchSheet
+
+Purpose: Communicate profile fit without implying acceptance probability.
+
+Variants: strong (85–100), good (70–84), possible (50–69), eligibility issue,
+insufficient profile.
+
+Compact anatomy: label (`Strong match`); optional numeric score (`95%`); `Why`
+action. Do not use a decorative circular progress chart.
+
+Sheet anatomy:
+
+- `Why this matches` title.
+- Helper: `Profile fit, not chance of acceptance.`
+- Satisfied factors with check icons.
+- Unknown facts with question icons.
+- Blockers with alert icons.
+- `Update profile` and `How matching works` actions.
+
+States: complete, missing profile data, blocker, rule explanation unavailable.
+
+Accessibility: expose label and numeric value in text; list factors semantically;
+focus returns to the triggering control.
+
+Acceptance: no numeric match is displayed without a route to its factors.
+
+## C09 DeadlineBadge / DateRow
+
+Purpose: Communicate when action is required.
+
+Variants:
+
+- Normal: more than seven days.
+- Closing soon: two to seven days.
+- Critical: today or tomorrow.
+- Rolling.
+- Closed, full, or cancelled.
+
+Anatomy: state text; exact date/time/timezone; optional secondary relative label.
+
+Rules:
+
+- Example: `Closes in 5 days · 2 Sep 2026, 11:59 PM SGT`.
+- Critical status may use error color but must not pulse.
+- Date logic uses a consistent prototype “today” so screenshots are stable.
+- Never say only `Tomorrow` or show an ambiguous numeric date.
+
+Accessibility: readable sentence; calendar icon is decorative.
+
+## C10 SourceTrustBlock
+
+Purpose: Put provenance and freshness beside the decision/action.
+
+Anatomy: source-status icon/label; organiser/source name; destination domain;
+`Checked <date>`; `View source`; `Report an issue`.
+
+Variants: official, organiser verified, community submitted, needs review, stale.
+
+Rules:
+
+- `Official source` means the destination is an official organiser page; it does
+  not mean Radar is an official NUS product.
+- Stale state remains visible and disables no action automatically; it warns and
+  gives the source link.
+- On detail, place this block immediately above the sticky application action or
+  directly below At a glance.
+
+Accessibility: external-link warning in accessible name; status does not depend
+on icon/color.
+
+## C11 SaveStatusControl and ReminderSheet
+
+Purpose: Turn intent into a retrievable next step.
+
+States: none, saved, preparing, applied, completed; updating; error.
+
+Behavior:
+
+- First save gives a short confirmation and offers `Set reminder`.
+- Status can be changed in Plan or detail and undone.
+- `Unsave` does not silently erase an application status; confirm if notes or
+  reminders exist.
+
+Reminder sheet anatomy: opportunity title; exact deadline; preset options
+(`1 week before`, `3 days before`, `1 day before`, `Custom`); channel/permission
+note; save action.
+
+Accessibility: status change announced politely; sheet uses radio group and
+labelled date/time controls.
+
+## C12 ForecastPreview / ForecastTimeline
+
+Purpose: Help users plan current deadlines and watch likely seasonal windows.
+
+Preview anatomy: `Your 30-day Radar`; count of confirmed deadlines; count of
+expected windows; nearest two items; `Open Radar`.
+
+Timeline anatomy:
+
+- Date/week axis.
+- Confirmed items use a solid mark and exact dates.
+- Expected windows use a dashed/hatched span and `Dates not announced`.
+- Clear two-item legend.
+- Selection detail with source or basis and `Save` / `Watch` action.
+
+States: mixed, confirmed-only, expected-only, empty, loading, error.
+
+Rules:
+
+- Do not show unexplained High/Medium/Low activity.
+- Expected basis example: `Usually announced in October; based on the 2025
+  organiser page.`
+- Watching an item changes user state, not forecast confidence.
+
+Accessibility: timeline has an equivalent chronological list; patterns/labels
+supplement color; items are keyboard selectable.
+
+## C13 ReviewSummary / ReviewCard
+
+Summary anatomy: average + count; star text alternative; recommendation percent
+and response count; optional distribution; `See all reviews`.
+
+Review card anatomy: rating; structured tags; note; participation year; year/
+faculty context; verification wording; date; report action.
+
+States: sufficient reviews (3+), sparse (1–2), none, loading, moderation removed.
+
+Rules:
+
+- Show `Not enough reviews yet` below three reviews instead of an authoritative
+  aggregate.
+- Say `Attendance verified` only when that is the verified property; otherwise
+  say `NUS student verified`.
+- Long notes collapse with a labelled `Read more` control.
+
+Accessibility: star graphic has a text label; distribution has readable values;
+no carousel-only access.
+
+## C14 AskRadarPanel
+
+Purpose: Translate a goal into catalogue-backed search constraints and results.
+
+Anatomy: concise intro; two or three prompt starters; message list; composer;
+interpreted criteria row; canonical compact opportunity cards; reset/history
+control; limitations/source note.
+
+Prototype prompts:
+
+- `Find a summer research opportunity in data or AI.`
+- `I want a weekend sustainability challenge.`
+- `Show exchange programmes I can plan for next semester.`
+
+Behavior:
+
+- Deterministic matching against `05-MOCK-DATA.json`.
+- Show the criteria Radar understood and allow removal.
+- Every result opens the normal opportunity detail.
+- Unknown query returns a useful refinement prompt, not invented results.
+- Deadline and eligibility wording comes from structured data, never message text.
+
+States: empty, composing, deterministic “thinking”, results, no results, error,
+cleared.
+
+Accessibility: message log is labelled and not overly live-announced; composer
+has visible label; Enter sends and Shift+Enter creates a new line; status changes
+use polite announcements.
+
+## C15 NotificationItem
+
+Types: deadline, source changed, expected item confirmed, recommendation.  
+Anatomy: type icon + text; exact timestamp; unread state; opportunity title;
+direct action.
+
+Rules:
+
+- Tapping an opportunity notification deep-links to its detail.
+- Notifications are generated only for saved/watched items or explicit user
+  preferences in the prototype.
+- Provide mark read and notification settings.
+
+## C16 Feedback states
+
+Provide reusable patterns for loading, empty, error, offline, permission,
+expired, and stale content.
+
+Anatomy: restrained radar/category illustration; short heading; one-sentence
+explanation; one primary recovery action; optional secondary action.
+
+Rules:
+
+- Skeletons reflect final layout and do not animate under reduced motion.
+- Errors preserve user-entered query/filter/message text.
+- Empty state is not an error and does not use red.
+- Permission denial keeps core app functions available; widget/notifications are
+  enhancements.
+
+## C17 Toast / Inline confirmation
+
+Use a toast for reversible, noncritical feedback: `Saved to Plan`, `Reminder set`,
+`Marked as applied`. Include `Undo` when safe.
+
+Use inline feedback for validation or data/source errors that require action.
+Never use a toast as the only record of a failed external handoff.
+
+Accessibility: polite live announcement; toast remains long enough to read and
+pause is not required because an equivalent persistent state exists.
+

@@ -1,0 +1,390 @@
+{
+  "meta": {
+    "schemaVersion": "1.0",
+    "prototypeToday": "2026-08-28T12:00:00+08:00",
+    "timezone": "Asia/Singapore",
+    "isPrototypeData": true,
+    "notice": "Every listing, review, source URL and notification in this file is fictional demo content. Do not present it as a live or official NUS listing."
+  },
+  "profile": {
+    "id": "demo-student",
+    "firstName": "Avery",
+    "year": 3,
+    "faculty": "School of Computing",
+    "interests": ["research", "competition", "career"],
+    "goals": ["build-experience", "explore-ai", "meet-mentors"],
+    "preferredModes": ["in-person", "hybrid", "online"],
+    "preferredCommitmentHoursPerWeekMax": 8,
+    "eligibilityFacts": {
+      "isNusUndergraduate": true,
+      "minimumYear": 3,
+      "summerAvailability": true
+    }
+  },
+  "categories": [
+    {"id": "career", "label": "Career & internships", "icon": "briefcase-business"},
+    {"id": "research", "label": "Research", "icon": "flask-conical"},
+    {"id": "venture", "label": "Entrepreneurship", "icon": "rocket"},
+    {"id": "competition", "label": "Competitions & hackathons", "icon": "trophy"},
+    {"id": "global", "label": "Global & exchange", "icon": "globe-2"},
+    {"id": "impact", "label": "Volunteering & impact", "icon": "heart-handshake"},
+    {"id": "event", "label": "Talks & workshops", "icon": "presentation"},
+    {"id": "funding", "label": "Scholarships & grants", "icon": "badge-dollar-sign"}
+  ],
+  "opportunities": [
+    {
+      "id": "proto-research-hcai",
+      "title": "Undergraduate Research Taster: Human-Centred AI",
+      "organiser": "Computing Research Studio",
+      "categoryId": "research",
+      "tags": ["AI", "Research", "Beginner friendly"],
+      "summary": "Join a four-week guided research sprint exploring how people understand and use AI tools, ending with a poster showcase.",
+      "availability": "open",
+      "applicationDeadline": "2026-09-02T23:59:00+08:00",
+      "programmeDates": {"start": "2026-09-14", "end": "2026-10-09"},
+      "location": "COM3, NUS",
+      "mode": "hybrid",
+      "eligibility": {
+        "confirmed": ["Current NUS undergraduate", "Open to Year 2 and above", "No prior research experience required"],
+        "toCheck": ["Able to attend the Friday poster showcase"],
+        "blockers": []
+      },
+      "commitment": {"label": "About 6 hours per week for 4 weeks", "provenance": "Organiser programme outline"},
+      "source": {
+        "status": "official",
+        "label": "Official organiser page",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/research-hcai",
+        "lastChecked": "2026-08-28T09:30:00+08:00"
+      },
+      "match": {
+        "score": 95,
+        "label": "Strong match",
+        "reasons": ["Matches your Research and AI interests", "Open to your year of study", "Fits your 8-hour weekly preference", "Builds hands-on experience"],
+        "missing": ["Friday showcase availability"],
+        "blockers": [],
+        "disclaimer": "Profile fit, not chance of acceptance."
+      },
+      "rating": {"average": 4.6, "count": 38, "wouldRecommendPercent": 92, "wouldRecommendCount": 36},
+      "reviewIds": ["review-hcai-01", "review-hcai-02", "review-hcai-03"],
+      "progress": {"status": "none", "nextAction": null, "reminderAt": null, "updatedAt": null},
+      "forecast": {"status": "confirmed", "basis": "Current fictional organiser listing", "previousOccurrence": null}
+    },
+    {
+      "id": "proto-civic-tech",
+      "title": "Southeast Asia Civic Tech Challenge",
+      "organiser": "Impact Builders Collective",
+      "categoryId": "competition",
+      "tags": ["Hackathon", "Public good", "Data"],
+      "summary": "Form a team and prototype a digital service that improves access to public information in Southeast Asia.",
+      "availability": "closingSoon",
+      "applicationDeadline": "2026-08-30T18:00:00+08:00",
+      "programmeDates": {"start": "2026-09-05", "end": "2026-09-06"},
+      "location": "NUS Enterprise building",
+      "mode": "in-person",
+      "eligibility": {
+        "confirmed": ["Tertiary student in Singapore", "Individual registration allowed"],
+        "toCheck": ["Must be available for both challenge days"],
+        "blockers": []
+      },
+      "commitment": {"label": "Two full challenge days plus optional briefing", "provenance": "Organiser schedule"},
+      "source": {
+        "status": "organiserVerified",
+        "label": "Organiser verified",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/civic-tech",
+        "lastChecked": "2026-08-28T10:10:00+08:00"
+      },
+      "match": {
+        "score": 88,
+        "label": "Strong match",
+        "reasons": ["Matches your Competitions interest", "Uses data for social impact", "No existing team required"],
+        "missing": ["Weekend availability"],
+        "blockers": [],
+        "disclaimer": "Profile fit, not chance of acceptance."
+      },
+      "rating": {"average": 4.2, "count": 12, "wouldRecommendPercent": 83, "wouldRecommendCount": 12},
+      "reviewIds": ["review-civic-01"],
+      "progress": {
+        "status": "preparing",
+        "nextAction": "Confirm teammate by 29 Aug",
+        "reminderAt": "2026-08-29T18:00:00+08:00",
+        "updatedAt": "2026-08-27T21:10:00+08:00"
+      },
+      "forecast": {"status": "confirmed", "basis": "Current fictional organiser listing", "previousOccurrence": null}
+    },
+    {
+      "id": "proto-global-innovation",
+      "title": "Global Innovation Internship — Ho Chi Minh City",
+      "organiser": "Global Experience Office",
+      "categoryId": "global",
+      "tags": ["Internship", "Overseas", "Innovation"],
+      "summary": "A possible summer placement cycle with regional startups; current-year applications have not been announced.",
+      "availability": "upcoming",
+      "applicationDeadline": null,
+      "programmeDates": null,
+      "location": "Ho Chi Minh City, Vietnam",
+      "mode": "in-person",
+      "eligibility": {
+        "confirmed": [],
+        "toCheck": ["Current-year eligibility not announced", "Current-year programme dates not announced"],
+        "blockers": []
+      },
+      "commitment": {"label": "Previous cycle ran for 8 weeks", "provenance": "Fictional 2025 organiser archive"},
+      "source": {
+        "status": "official",
+        "label": "Previous organiser page",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/global-innovation-2025",
+        "lastChecked": "2026-08-26T15:00:00+08:00"
+      },
+      "match": {
+        "score": 72,
+        "label": "Good match",
+        "reasons": ["Supports your build-experience goal", "You indicated summer availability"],
+        "missing": ["Current-year eligibility", "Current-year dates", "Global is not one of your selected interests"],
+        "blockers": [],
+        "disclaimer": "Profile fit based on limited historical information."
+      },
+      "rating": {"average": null, "count": 0, "wouldRecommendPercent": null, "wouldRecommendCount": 0},
+      "reviewIds": [],
+      "progress": {"status": "saved", "nextAction": "Wait for dates to be announced", "reminderAt": null, "updatedAt": "2026-08-28T11:20:00+08:00"},
+      "forecast": {
+        "status": "expected",
+        "basis": "The fictional 2025 cycle opened in October. Dates for 2026 have not been announced.",
+        "previousOccurrence": {"announced": "2025-10-08", "applicationDeadline": "2025-11-02"}
+      }
+    },
+    {
+      "id": "proto-product-internship",
+      "title": "Student Product Design Internship",
+      "organiser": "Campus Tools Lab",
+      "categoryId": "career",
+      "tags": ["Internship", "Product design", "Part-time"],
+      "summary": "A semester-time internship supporting research, prototyping, and usability testing for student-facing digital tools.",
+      "availability": "open",
+      "applicationDeadline": "2026-09-15T17:00:00+08:00",
+      "programmeDates": {"start": "2026-10-01", "end": "2026-12-11"},
+      "location": "Kent Ridge",
+      "mode": "hybrid",
+      "eligibility": {
+        "confirmed": ["Current tertiary student", "Portfolio may contain coursework"],
+        "toCheck": ["Able to work two weekdays"],
+        "blockers": []
+      },
+      "commitment": {"label": "16 hours per week for 10 weeks", "provenance": "Organiser role description"},
+      "source": {
+        "status": "communitySubmitted",
+        "label": "Community submitted",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/product-internship",
+        "lastChecked": "2026-08-24T14:00:00+08:00"
+      },
+      "match": {
+        "score": 76,
+        "label": "Good match",
+        "reasons": ["Matches your Career interest", "Builds hands-on experience", "Hybrid mode matches your preference"],
+        "missing": ["Weekday availability"],
+        "blockers": ["Exceeds your preferred 8 hours per week"],
+        "disclaimer": "Profile fit, not chance of acceptance."
+      },
+      "rating": {"average": 4.8, "count": 2, "wouldRecommendPercent": 100, "wouldRecommendCount": 2},
+      "reviewIds": ["review-product-01", "review-product-02"],
+      "progress": {"status": "none", "nextAction": null, "reminderAt": null, "updatedAt": null},
+      "forecast": {"status": "confirmed", "basis": "Current fictional community-submitted listing", "previousOccurrence": null}
+    },
+    {
+      "id": "proto-sustainability-lab",
+      "title": "Weekend Sustainability Venture Lab",
+      "organiser": "Green Founders Network",
+      "categoryId": "venture",
+      "tags": ["Sustainability", "Entrepreneurship", "Workshop"],
+      "summary": "Test a sustainability problem and pitch a small venture concept with facilitator and peer feedback over one weekend.",
+      "availability": "open",
+      "applicationDeadline": "2026-09-10T12:00:00+08:00",
+      "programmeDates": {"start": "2026-09-19", "end": "2026-09-20"},
+      "location": "i3 building, NUS",
+      "mode": "in-person",
+      "eligibility": {
+        "confirmed": ["Open to all NUS students", "No existing venture required"],
+        "toCheck": [],
+        "blockers": []
+      },
+      "commitment": {"label": "One full weekend", "provenance": "Organiser schedule"},
+      "source": {
+        "status": "organiserVerified",
+        "label": "Organiser verified",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/sustainability-lab",
+        "lastChecked": "2026-08-27T13:45:00+08:00"
+      },
+      "match": {
+        "score": 64,
+        "label": "Possible match",
+        "reasons": ["Builds hands-on experience", "Short, fixed commitment"],
+        "missing": ["Venture is not one of your selected interests", "Weekend availability"],
+        "blockers": [],
+        "disclaimer": "Profile fit, not chance of acceptance."
+      },
+      "rating": {"average": 4.4, "count": 19, "wouldRecommendPercent": 89, "wouldRecommendCount": 18},
+      "reviewIds": [],
+      "progress": {"status": "none", "nextAction": null, "reminderAt": null, "updatedAt": null},
+      "forecast": {"status": "confirmed", "basis": "Current fictional organiser listing", "previousOccurrence": null}
+    },
+    {
+      "id": "proto-data-impact",
+      "title": "Data for Social Good Volunteer Lab",
+      "organiser": "Community Data Circle",
+      "categoryId": "impact",
+      "tags": ["Volunteering", "Data", "Community"],
+      "summary": "Work with a community partner to clean and visualise a small public-interest dataset over six guided evenings.",
+      "availability": "closed",
+      "applicationDeadline": "2026-08-25T23:59:00+08:00",
+      "programmeDates": {"start": "2026-09-03", "end": "2026-10-08"},
+      "location": "Online",
+      "mode": "online",
+      "eligibility": {
+        "confirmed": ["Basic spreadsheet skills"],
+        "toCheck": [],
+        "blockers": []
+      },
+      "commitment": {"label": "3 hours per week for 6 weeks", "provenance": "Organiser outline"},
+      "source": {
+        "status": "official",
+        "label": "Official organiser page",
+        "domain": "example.com",
+        "url": "https://example.com/prototype/data-impact",
+        "lastChecked": "2026-08-26T08:15:00+08:00"
+      },
+      "match": {
+        "score": 79,
+        "label": "Good match",
+        "reasons": ["Matches your AI/data interest", "Fits your weekly commitment preference"],
+        "missing": ["Impact is not one of your selected interests"],
+        "blockers": ["Applications are closed"],
+        "disclaimer": "Profile fit, not chance of acceptance."
+      },
+      "rating": {"average": 4.5, "count": 26, "wouldRecommendPercent": 88, "wouldRecommendCount": 25},
+      "reviewIds": [],
+      "progress": {"status": "completed", "nextAction": null, "reminderAt": null, "updatedAt": "2026-08-26T19:00:00+08:00"},
+      "forecast": {"status": "confirmed", "basis": "Closed fictional organiser listing", "previousOccurrence": null}
+    }
+  ],
+  "reviews": [
+    {
+      "id": "review-hcai-01",
+      "opportunityId": "proto-research-hcai",
+      "rating": 5,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "accurate",
+      "organiserCommunication": "clear",
+      "bestFor": ["First research experience", "Students who enjoy interviews"],
+      "note": "The weekly scope was manageable and the mentor feedback made the final poster much less intimidating.",
+      "reviewer": {"displayName": "Anonymous", "year": 3, "faculty": "School of Computing", "participationYear": 2025, "verification": "attendanceVerified"},
+      "createdAt": "2026-01-18"
+    },
+    {
+      "id": "review-hcai-02",
+      "opportunityId": "proto-research-hcai",
+      "rating": 4,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "slightlyHigher",
+      "organiserCommunication": "clear",
+      "bestFor": ["Students comfortable with self-directed work"],
+      "note": "Good introduction, but the last week took closer to nine hours because of poster revisions.",
+      "reviewer": {"displayName": "M.", "year": 4, "faculty": "College of Design and Engineering", "participationYear": 2025, "verification": "nusStudentVerified"},
+      "createdAt": "2025-12-09"
+    },
+    {
+      "id": "review-hcai-03",
+      "opportunityId": "proto-research-hcai",
+      "rating": 5,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "accurate",
+      "organiserCommunication": "clear",
+      "bestFor": ["Exploring research before UROP"],
+      "note": "I liked that the programme explained research methods before asking us to choose a question.",
+      "reviewer": {"displayName": "Anonymous", "year": 2, "faculty": "Faculty of Arts and Social Sciences", "participationYear": 2025, "verification": "attendanceVerified"},
+      "createdAt": "2025-11-30"
+    },
+    {
+      "id": "review-civic-01",
+      "opportunityId": "proto-civic-tech",
+      "rating": 4,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "accurate",
+      "organiserCommunication": "mixed",
+      "bestFor": ["Meeting collaborators", "Fast prototyping"],
+      "note": "Strong mentors and useful problem statements. The final submission instructions could have been clearer.",
+      "reviewer": {"displayName": "J.", "year": 3, "faculty": "School of Computing", "participationYear": 2025, "verification": "nusStudentVerified"},
+      "createdAt": "2025-10-16"
+    },
+    {
+      "id": "review-product-01",
+      "opportunityId": "proto-product-internship",
+      "rating": 5,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "unknown",
+      "organiserCommunication": "clear",
+      "bestFor": ["Portfolio building"],
+      "note": "Prototype review only; the aggregate should remain in the sparse state.",
+      "reviewer": {"displayName": "Anonymous", "year": 3, "faculty": "School of Computing", "participationYear": 2025, "verification": "nusStudentVerified"},
+      "createdAt": "2026-02-02"
+    },
+    {
+      "id": "review-product-02",
+      "opportunityId": "proto-product-internship",
+      "rating": 5,
+      "wouldRecommend": true,
+      "commitmentAccuracy": "unknown",
+      "organiserCommunication": "clear",
+      "bestFor": ["User research practice"],
+      "note": "Prototype review only; two responses are not enough for a confident aggregate.",
+      "reviewer": {"displayName": "R.", "year": 4, "faculty": "College of Design and Engineering", "participationYear": 2025, "verification": "nusStudentVerified"},
+      "createdAt": "2026-01-20"
+    }
+  ],
+  "assistantScenarios": [
+    {
+      "id": "summer-research",
+      "matches": ["summer", "research", "data", "ai"],
+      "interpretedCriteria": ["Research", "Data or AI", "Summer or flexible timing"],
+      "resultOpportunityIds": ["proto-research-hcai"],
+      "response": "I found one current research match. It aligns with your AI interest and is open to your year; check the Friday showcase requirement."
+    },
+    {
+      "id": "weekend-sustainability",
+      "matches": ["weekend", "sustainability", "challenge", "venture"],
+      "interpretedCriteria": ["Sustainability", "Weekend", "Short programme"],
+      "resultOpportunityIds": ["proto-sustainability-lab", "proto-civic-tech"],
+      "response": "These are the closest short-format options. One is sustainability-focused; the other is a civic-tech challenge closing soon."
+    },
+    {
+      "id": "exchange-next-semester",
+      "matches": ["exchange", "global", "overseas", "next semester"],
+      "interpretedCriteria": ["Global or exchange", "Plan ahead"],
+      "resultOpportunityIds": ["proto-global-innovation"],
+      "response": "I found an expected seasonal window, not a current application. Dates are unannounced, so you can watch it and review the historical basis."
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notification-civic-deadline",
+      "type": "deadline",
+      "opportunityId": "proto-civic-tech",
+      "createdAt": "2026-08-28T09:00:00+08:00",
+      "isRead": false,
+      "title": "Civic Tech Challenge closes in 2 days",
+      "body": "Your next action is to confirm a teammate by 29 Aug."
+    },
+    {
+      "id": "notification-global-confirmed-demo",
+      "type": "expectedItemConfirmed",
+      "opportunityId": "proto-global-innovation",
+      "createdAt": "2026-08-27T16:00:00+08:00",
+      "isRead": false,
+      "title": "Demo: dates announced for a watched opportunity",
+      "body": "Open the listing to review the confirmed deadline and updated eligibility."
+    }
+  ]
+}

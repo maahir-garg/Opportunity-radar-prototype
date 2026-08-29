@@ -1,0 +1,10 @@
+{
+  "description": "Discover personalized opportunities with the NUS Opportunity Radar, evaluate options, and manage applications seamlessly for NUS students.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
