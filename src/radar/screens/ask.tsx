@@ -170,6 +170,7 @@ export function AskRadar() {
               className="input"
               rows={1}
               placeholder="Describe what you're looking for…"
+              style={{ paddingLeft: "var(--radar-space-3)", paddingRight: "var(--radar-space-3)" }}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {

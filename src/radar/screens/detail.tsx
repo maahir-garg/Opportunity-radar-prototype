@@ -80,8 +80,8 @@ export function Detail({ id }: { id: string }) {
         >
           <span
             style={{
-              width: "3rem",
-              height: "3rem",
+              width: "var(--radar-space-12)",
+              height: "var(--radar-space-12)",
               borderRadius: "var(--radar-radius-medium)",
               background: "var(--radar-color-surface)",
               display: "grid",
@@ -158,14 +158,23 @@ export function Detail({ id }: { id: string }) {
               <span className="glance__value">{cat.label}</span>
             </div>
           </div>
-          <p className="deadline__abs" style={{ marginTop: "var(--radar-space-2)" }}>
-            <Timer size={12} aria-hidden /> Commitment from: {opp.commitment.provenance}
+          <p
+            className="deadline__abs"
+            style={{
+              marginTop: "var(--radar-space-2)",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "var(--radar-space-2)",
+            }}
+          >
+            <Timer size={12} aria-hidden className="eligrow__icon" />
+            Commitment from: {opp.commitment.provenance}
           </p>
         </Section>
 
         {/* Eligibility */}
         <Section title="Eligibility">
-          <div className="card stack--sm">
+          <div className="card stack stack--sm">
             {opp.eligibility.confirmed.map((e) => (
               <p key={e} className="eligrow">
                 <CheckCircle2 size={18} className="eligrow__icon" aria-hidden color="var(--radar-color-match-text)" />
@@ -198,8 +207,17 @@ export function Detail({ id }: { id: string }) {
         {/* Source trust block */}
         <div className={`source ${stale ? "source--stale" : ""}`}>
           {stale ? (
-            <p style={{ fontWeight: 600, color: "var(--radar-color-warning-text)" }}>
-              <AlertTriangle size={16} aria-hidden /> We could not re-check this listing.
+            <p
+              style={{
+                fontWeight: 600,
+                color: "var(--radar-color-warning-text)",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "var(--radar-space-2)",
+              }}
+            >
+              <AlertTriangle size={16} aria-hidden className="eligrow__icon" />
+              We could not re-check this listing.
             </p>
           ) : null}
           <div className="source__row" style={{ justifyContent: "space-between" }}>
@@ -276,13 +294,14 @@ export function Detail({ id }: { id: string }) {
             >
               Open official application
             </Button>
-            <div style={{ display: "flex", gap: "var(--radar-space-2)", width: "100%" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--radar-space-2)", width: "100%" }}>
               <Button
                 variant="secondary"
                 block
                 icon={saved ? <BookmarkCheck size={16} aria-hidden /> : <Bookmark size={16} aria-hidden />}
                 onClick={() => toggleSave(opp.id)}
                 aria-pressed={saved}
+                style={{ flex: "1 1 9.5rem", whiteSpace: "nowrap" }}
               >
                 {saved ? "Saved" : "Save"}
               </Button>
@@ -291,6 +310,7 @@ export function Detail({ id }: { id: string }) {
                 block
                 icon={<Bell size={16} aria-hidden />}
                 onClick={() => openSheet({ name: "reminder", id: opp.id })}
+                style={{ flex: "1 1 9.5rem", whiteSpace: "nowrap" }}
               >
                 Set reminder
               </Button>
@@ -366,8 +386,12 @@ export function Reviews({ id }: { id: string }) {
                 <ReviewCard key={r.id} review={r} />
               ))}
             </div>
-            <p className="deadline__abs">
-              <Clock size={12} aria-hidden /> Reviews are from NUS students. Moderation removes personal contact details.
+            <p
+              className="deadline__abs"
+              style={{ display: "flex", alignItems: "flex-start", gap: "var(--radar-space-2)" }}
+            >
+              <Clock size={12} aria-hidden className="eligrow__icon" />
+              Reviews are from NUS students. Moderation removes personal contact details.
             </p>
           </>
         ) : (

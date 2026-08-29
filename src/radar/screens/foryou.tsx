@@ -34,21 +34,34 @@ export function ForYou() {
     .map((i) => categories.find((c) => c.id === i)?.label ?? i);
 
   const visible = opportunities.filter((o) => o.progress.status !== "dismissed");
+
+  // Track opportunities already placed in an earlier section so later
+  // sections don't select (and render) the same card again.
+  const usedIds = new Set<string>();
+
   const topMatches = [...visible]
     .filter((o) => o.forecast.status !== "expected" && o.match.score >= 70 && o.availability !== "closed")
     .sort((a, b) => b.match.score - a.match.score)
     .slice(0, 2);
+  topMatches.forEach((o) => usedIds.add(o.id));
+
+  // Not capped to a fixed N, so excluding already-used ids naturally
+  // backfills with the next-best (by deadline) eligible candidate instead
+  // of leaving the section short.
   const closingSoon = visible
     .filter(
       (o) =>
+        !usedIds.has(o.id) &&
         o.applicationDeadline &&
         daysUntil(o.applicationDeadline) >= 0 &&
         daysUntil(o.applicationDeadline) <= 10,
     )
     .sort((a, b) => daysUntil(a.applicationDeadline!) - daysUntil(b.applicationDeadline!));
+  closingSoon.forEach((o) => usedIds.add(o.id));
+
   const primaryInterest = profile.interests[0];
   const becauseOf = visible.filter(
-    (o) => o.categoryId === primaryInterest && !topMatches.includes(o),
+    (o) => o.categoryId === primaryInterest && !usedIds.has(o.id),
   );
 
   return (
@@ -65,7 +78,7 @@ export function ForYou() {
 
         <ForecastPreview />
 
-        <Section title="Top matches" overline="Chosen for you">
+        <Section title="Top matches">
           {loading ? (
             <div className="stack">
               <CardSkeleton />

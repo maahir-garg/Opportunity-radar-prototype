@@ -46,17 +46,6 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "badge-dollar-sign": BadgeDollarSign,
 };
 
-const CATEGORY_ACCENT: Record<string, string> = {
-  career: "var(--radar-blue-700)",
-  research: "var(--radar-teal-700)",
-  venture: "var(--radar-orange-600)",
-  competition: "var(--radar-navy-800)",
-  global: "var(--radar-blue-700)",
-  impact: "var(--radar-teal-700)",
-  event: "var(--radar-navy-800)",
-  funding: "var(--radar-amber-700)",
-};
-
 export function CategoryIcon({ id, size = 16 }: { id: string; size?: number }) {
   const cat = categoryById(id);
   const Icon = CATEGORY_ICONS[cat.icon] ?? BriefcaseBusiness;
@@ -151,7 +140,7 @@ export function MatchIndicator({
           label
         ) : (
           <>
-            <span className="tnum">{opp.match.score}%</span> {label}
+            <span className="tnum">{opp.match.score}%</span>{label}
           </>
         )}
       </span>
@@ -161,7 +150,7 @@ export function MatchIndicator({
           onClick={() => openSheet({ name: "why", id: opp.id })}
           aria-label={`Why this matches: ${opp.title}`}
         >
-          <CircleHelp size={16} aria-hidden /> Why this matches
+          <CircleHelp size={16} aria-hidden />Why this matches
         </button>
       ) : null}
     </span>
@@ -228,7 +217,7 @@ export function RatingLine({ opp }: { opp: Opportunity }) {
   }
   return (
     <span className="oppcard__metaitem tnum">
-      <Star size={14} aria-hidden fill="var(--radar-color-signal)" stroke="none" />
+      <Star size={14} aria-hidden fill="var(--radar-color-text-primary)" stroke="none" />
       {opp.rating.average?.toFixed(1)} · {opp.rating.count} reviews
     </span>
   );
@@ -308,11 +297,7 @@ export function OpportunityCard({
       }`}
       aria-labelledby={`opp-${opp.id}-${variant}`}
     >
-      <span
-        className="oppcard__accent"
-        style={{ background: CATEGORY_ACCENT[opp.categoryId] }}
-        aria-hidden
-      />
+      <span className="oppcard__accent" aria-hidden />
       <button
         className="oppcard__open"
         onClick={() => navigate({ name: "detail", id: opp.id })}
@@ -345,22 +330,37 @@ export function OpportunityCard({
 
       <div className="oppcard__meta">
         <span className="oppcard__metaitem">
-          <CategoryIcon id={opp.categoryId} /> {cat.label}
+          <CategoryIcon id={opp.categoryId} />{cat.label}
         </span>
         <span className="oppcard__metaitem">
-          <MapPin size={14} aria-hidden /> {opp.location}
+          <MapPin size={14} aria-hidden />{opp.location}
         </span>
         {opp.rating.count >= 3 ? <RatingLine opp={opp} /> : null}
       </div>
 
       {stale ? (
-        <p className="deadline__abs" style={{ color: "var(--radar-color-warning-text)" }}>
-          <Clock size={14} aria-hidden /> Source last checked {formatDate(opp.source.lastChecked)}
+        <p
+          className="deadline__abs"
+          style={{
+            color: "var(--radar-color-warning-text)",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.375rem",
+          }}
+        >
+          <Clock size={14} aria-hidden />Source last checked {formatDate(opp.source.lastChecked)}
         </p>
       ) : null}
 
       <div className="oppcard__footer">
-        {opp.progress.status !== "none" && opp.progress.status !== "dismissed" ? (
+        {/* "saved" is excluded here: the SaveButton below already reads
+            "Saved" as an interactive toggle, so showing a static "Saved"
+            pill alongside it would communicate the same state twice.
+            Other progress stages (preparing/applied/completed) are distinct
+            from the save toggle, so they still get their own pill. */}
+        {opp.progress.status !== "none" &&
+        opp.progress.status !== "dismissed" &&
+        opp.progress.status !== "saved" ? (
           <ProgressPill status={opp.progress.status} />
         ) : (
           <span className="oppcard__org">Checked {formatDate(opp.source.lastChecked)}</span>
@@ -389,10 +389,12 @@ export function ReviewCard({ review }: { review: Review }) {
       ? "Attendance verified"
       : "NUS student verified";
   return (
-    <article className="card card--quiet stack--sm">
+    <article className="card card--quiet stack stack--sm">
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
         <Stars value={review.rating} />
-        <span className="deadline__abs">{formatDate(review.createdAt + "T00:00:00+08:00")}</span>
+        <span className="deadline__abs" style={{ flexShrink: 0, whiteSpace: "nowrap" }}>
+          {formatDate(review.createdAt + "T00:00:00+08:00")}
+        </span>
       </div>
       <p style={{ fontSize: "var(--radar-font-size-small)" }}>{review.note}</p>
       <div className="oppcard__meta">
@@ -416,7 +418,7 @@ export function ReviewCard({ review }: { review: Review }) {
 export function ReviewSummary({ opp }: { opp: Opportunity }) {
   if (opp.rating.count < 3) {
     return (
-      <div className="card stack--sm">
+      <div className="card stack stack--sm">
         <p className="feedback__title" style={{ fontSize: "var(--radar-font-size-body)" }}>
           Not enough reviews yet
         </p>
@@ -430,7 +432,7 @@ export function ReviewSummary({ opp }: { opp: Opportunity }) {
   }
   return (
     <div className="card stack">
-      <div style={{ display: "flex", gap: "var(--radar-space-4)", alignItems: "center" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--radar-space-4)", alignItems: "center" }}>
         <div>
           <p className="tnum" style={{ fontSize: "var(--radar-font-size-heading-1)", fontWeight: 700, lineHeight: 1 }}>
             {opp.rating.average?.toFixed(1)}
@@ -438,10 +440,10 @@ export function ReviewSummary({ opp }: { opp: Opportunity }) {
           <Stars value={opp.rating.average ?? 0} />
           <p className="deadline__abs">{opp.rating.count} student reviews</p>
         </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
+        <div style={{ marginLeft: "auto", textAlign: "right", flexShrink: 0 }}>
           <p className="match__pill match__pill--strong" style={{ display: "inline-flex" }}>
             <ThumbsUp size={14} aria-hidden />
-            <span className="tnum">{opp.rating.wouldRecommendPercent}%</span> recommend
+            <span className="tnum">{opp.rating.wouldRecommendPercent}%</span>recommend
           </p>
           <p className="deadline__abs">from {opp.rating.wouldRecommendCount} responses</p>
         </div>
@@ -460,20 +462,15 @@ export function Section({
   title,
   action,
   children,
-  overline,
 }: {
   title: string;
   action?: ReactNode;
   children: ReactNode;
-  overline?: string;
 }) {
   return (
     <section className="section">
       <div className="section__head">
-        <div>
-          {overline ? <p className="overline">{overline}</p> : null}
-          <h2 className="section__title">{title}</h2>
-        </div>
+        <h2 className="section__title">{title}</h2>
         {action}
       </div>
       {children}

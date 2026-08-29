@@ -135,7 +135,7 @@ function HowMatchingSheet() {
           ].map(([k, v]) => (
             <li key={k} className="source__row" style={{ justifyContent: "space-between" }}>
               <span>{k}</span>
-              <span className="tnum" style={{ fontWeight: 600 }}>
+              <span className="tnum" style={{ fontWeight: 600, flexShrink: 0, whiteSpace: "nowrap" }}>
                 {v}
               </span>
             </li>
@@ -225,7 +225,7 @@ function ReminderSheet({ id }: { id: string }) {
           ) : null}
         </div>
         <div className="alert alert--info">
-          <Info size={16} aria-hidden style={{ flex: "none" }} />
+          <Info size={16} aria-hidden style={{ flex: "none", marginTop: "0.125rem" }} />
           {notificationsPermission === "denied"
             ? "Notifications are off - the reminder is saved and shown in Plan, but no push alert will be sent."
             : "Reminders appear in Plan and as a mock notification. No real alert is sent in this prototype."}
@@ -252,7 +252,7 @@ function HandoffSheet({ id, failed }: { id: string; failed?: boolean }) {
       <Sheet title="Link unavailable" onClose={closeSheet}>
         <div className="stack">
           <div className="alert alert--error">
-            <AlertTriangle size={16} aria-hidden style={{ flex: "none" }} />
+            <AlertTriangle size={16} aria-hidden style={{ flex: "none", marginTop: "0.125rem" }} />
             We could not reach the official application page.
           </div>
           <p className="deadline__abs">
@@ -419,7 +419,7 @@ function FilterSheet() {
 
         {count === 0 ? (
           <div className="alert alert--warning">
-            <AlertTriangle size={16} aria-hidden style={{ flex: "none" }} />
+            <AlertTriangle size={16} aria-hidden style={{ flex: "none", marginTop: "0.125rem" }} />
             No opportunities match these filters. Try removing one.
           </div>
         ) : null}
@@ -427,6 +427,7 @@ function FilterSheet() {
         <div className="stickybar" style={{ position: "static", boxShadow: "none", border: "none", padding: 0 }}>
           <Button
             variant="secondary"
+            style={{ flexShrink: 0, whiteSpace: "nowrap" }}
             onClick={() => setDraft({ ...emptyFilters, query: draft.query })}
             disabled={activeFilterCount(draft) === 0}
           >

@@ -66,15 +66,16 @@ export function Landing() {
             { icon: CalendarClock, title: "Act before the deadline", body: "Save, set a reminder, and plan the next 30 days with confirmed and expected windows kept clearly apart." },
           ].map((o) => (
             <div className="card stack--sm" key={o.title}>
-              <o.icon size={22} aria-hidden color="var(--radar-color-action-primary)" />
-              <h3 className="section__title" style={{ fontSize: "var(--radar-font-size-title, 1.125rem)" }}>{o.title}</h3>
+              <div style={{ display: "flex", alignItems: "center", gap: "var(--radar-space-2)" }}>
+                <o.icon size={22} aria-hidden color="var(--radar-color-action-primary)" />
+                <h3 className="section__title" style={{ fontSize: "var(--radar-font-size-title, 1.125rem)" }}>{o.title}</h3>
+              </div>
               <p className="feedback__text" style={{ textAlign: "left" }}>{o.body}</p>
             </div>
           ))}
         </section>
 
         <section className="section card stack">
-          <p className="overline">Built on trust</p>
           <h2 className="section__title">Sources and forecasts you can question</h2>
           <div className="landing__grid3">
             <p className="eligrow"><ShieldCheck size={18} className="eligrow__icon" aria-hidden color="var(--radar-color-match-text)" /> Every listing states its source status and the date it was last checked.</p>
@@ -87,7 +88,7 @@ export function Landing() {
           <h2 className="section__title" id="waitlist-h">Join the waitlist</h2>
           {joined ? (
             <div className="alert alert--info" role="status">
-              <Check size={16} aria-hidden style={{ flex: "none" }} /> Thanks - you're on the demo waitlist. This prototype stores nothing.
+              <Check size={16} aria-hidden style={{ flex: "none", alignSelf: "center" }} /> Thanks - you're on the demo waitlist. This prototype stores nothing.
             </div>
           ) : (
             <form
@@ -173,7 +174,7 @@ export function Welcome() {
           </div>
         ) : null}
 
-        <div className="stack--sm">
+        <div className="stack--sm" style={{ gap: "var(--radar-space-4)" }}>
           <Button size="lg" block onClick={() => setPhase("setup")}>
             Set up my Radar
           </Button>
@@ -211,10 +212,14 @@ export function ProfileSetup() {
   const { completeOnboarding } = useStore();
   const [step, setStep] = useState(0);
   const [year, setYear] = useState(3);
+  const [yearTouched, setYearTouched] = useState(false);
   const [faculty, setFaculty] = useState("School of Computing");
+  const [facultyTouched, setFacultyTouched] = useState(false);
   const [interests, setInterests] = useState<CategoryId[]>([]);
   const [goals, setGoals] = useState<string[]>([]);
-  const [modes, setModes] = useState<string[]>(["in-person", "hybrid", "online"]);
+  // Starts unselected, matching the Interests and Goals chip groups above -
+  // an empty selection here honestly means "no preference set", not "all picked".
+  const [modes, setModes] = useState<string[]>([]);
 
   const steps = ["Study context", "Interests", "Goals", "Review"];
   const canNext =
@@ -226,12 +231,16 @@ export function ProfileSetup() {
     );
   }
   function finish() {
+    // Persist exactly what the user actually chose - including empty
+    // selections when a step was skipped. seedProfile only supplies fields
+    // this wizard never collects (id, firstName, eligibility facts); it must
+    // never silently stand in for interests/goals the user never picked.
     const profile: Profile = {
       ...seedProfile,
       year,
       faculty,
-      interests: interests.length ? interests : seedProfile.interests,
-      goals: goals.length ? goals : seedProfile.goals,
+      interests,
+      goals,
       preferredModes: modes,
     };
     completeOnboarding(profile);
@@ -268,7 +277,14 @@ export function ProfileSetup() {
                 <span className="field__label">Year of study</span>
                 <div style={{ display: "flex", gap: "var(--radar-space-2)", flexWrap: "wrap" }}>
                   {[1, 2, 3, 4].map((y) => (
-                    <Chip key={y} pressed={year === y} onToggle={() => setYear(y)}>
+                    <Chip
+                      key={y}
+                      pressed={year === y}
+                      onToggle={() => {
+                        setYear(y);
+                        setYearTouched(true);
+                      }}
+                    >
                       Year {y}
                     </Chip>
                   ))}
@@ -276,7 +292,14 @@ export function ProfileSetup() {
               </label>
               <label className="field">
                 <span className="field__label">Faculty or school</span>
-                <select className="input" value={faculty} onChange={(e) => setFaculty(e.target.value)}>
+                <select
+                  className="input"
+                  value={faculty}
+                  onChange={(e) => {
+                    setFaculty(e.target.value);
+                    setFacultyTouched(true);
+                  }}
+                >
                   {["School of Computing", "College of Design and Engineering", "Faculty of Arts and Social Sciences", "NUS Business School", "Faculty of Science"].map((f) => (
                     <option key={f}>{f}</option>
                   ))}
@@ -341,16 +364,48 @@ export function ProfileSetup() {
           {step === 3 ? (
             <div className="stack">
               <p className="feedback__text" style={{ textAlign: "left" }}>Here is how each factor will shape your results. You can change any of these anytime in Profile.</p>
-              {[
-                ["Year & faculty", `Year ${year} · ${faculty}`, "Used to check eligibility windows."],
-                ["Interests", (interests.length ? interests : seedProfile.interests).map((i) => categories.find((c) => c.id === i)?.label).join(", "), "Ranks matching categories higher."],
-                ["Goals", (goals.length ? goals : seedProfile.goals).map((g) => goalLabels[g] ?? g).join(", "), "Adds goal-alignment points."],
-                ["Mode", modes.join(", ") || "Any", "Small preference weighting."],
-              ].map(([k, v, why]) => (
-                <div className="card card--quiet stack--sm" key={k as string}>
-                  <p className="glance__label">{k}</p>
-                  <p style={{ fontWeight: 600 }}>{v}</p>
-                  <p className="deadline__abs">{why}</p>
+              {(
+                [
+                  {
+                    label: "Year & faculty",
+                    value: yearTouched || facultyTouched ? `Year ${year} · ${faculty}` : "Not set - you can add this in Profile later",
+                    why: "Used to check eligibility windows.",
+                    notSet: !(yearTouched || facultyTouched),
+                  },
+                  {
+                    label: "Interests",
+                    value: interests.length
+                      ? interests.map((i) => categories.find((c) => c.id === i)?.label).join(", ")
+                      : "Not set - you can add this in Profile later",
+                    why: "Ranks matching categories higher.",
+                    notSet: interests.length === 0,
+                  },
+                  {
+                    label: "Goals",
+                    value: goals.length ? goals.map((g) => goalLabels[g] ?? g).join(", ") : "Not set - you can add this in Profile later",
+                    why: "Adds goal-alignment points.",
+                    notSet: goals.length === 0,
+                  },
+                  {
+                    label: "Mode",
+                    value: modes.length ? modes.join(", ") : "Any (no preference set)",
+                    why: "Small preference weighting.",
+                    notSet: false,
+                  },
+                ] as const
+              ).map((row) => (
+                <div className="card card--quiet stack--sm" key={row.label}>
+                  <p className="glance__label">{row.label}</p>
+                  <p
+                    style={{
+                      fontWeight: row.notSet ? 400 : 600,
+                      fontStyle: row.notSet ? "italic" : "normal",
+                      color: row.notSet ? "var(--radar-color-text-secondary)" : undefined,
+                    }}
+                  >
+                    {row.value}
+                  </p>
+                  <p className="deadline__abs">{row.why}</p>
                 </div>
               ))}
               <p className="deadline__abs">We never use faculty, year or personal facts to guess your chance of acceptance. <span className="linkbtn">Privacy explained</span></p>
@@ -359,8 +414,8 @@ export function ProfileSetup() {
         </div>
 
         <div className="stickybar">
-          {step < 2 ? (
-            <Button variant="tertiary" onClick={() => (step === 3 ? finish() : setStep((s) => Math.min(3, s + 1)))}>
+          {step < 3 ? (
+            <Button variant="tertiary" onClick={() => setStep((s) => Math.min(3, s + 1))}>
               Skip for now
             </Button>
           ) : null}
@@ -437,7 +492,7 @@ export function WidgetPreview() {
           nav.closeSheet();
         }}
       >
-        <span className="overline" style={{ color: "var(--radar-color-signal)" }}>
+        <span className="overline" style={{ display: "inline-flex", alignItems: "center", gap: "var(--radar-space-1)", color: "var(--radar-color-signal)" }}>
           <RadarMark size={16} /> Radar
         </span>
         {isWatching(opp.id) ? (
@@ -460,7 +515,7 @@ export function WidgetPreview() {
             Next: {opp.progress.nextAction}
           </span>
         ) : null}
-        <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", color: "var(--radar-color-signal)", fontWeight: 600, fontSize: "var(--radar-font-size-small)" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--radar-space-1)", color: "var(--radar-color-signal)", fontWeight: 600, fontSize: "var(--radar-font-size-small)" }}>
           Tap to view <ArrowRight size={14} aria-hidden />
         </span>
       </button>

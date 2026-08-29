@@ -72,7 +72,18 @@ export function Explore() {
           Or Ask Radar to describe what you want
         </Button>
 
-        <div style={{ display: "flex", gap: "var(--radar-space-2)", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--radar-space-2)",
+            flexWrap: "nowrap",
+            overflowX: "auto",
+            overflowY: "hidden",
+            WebkitOverflowScrolling: "touch",
+            margin: "0 calc(var(--radar-space-4) * -1)",
+            padding: "0 var(--radar-space-4) var(--radar-space-1)",
+          }}
+        >
           {categories.map((c) => (
             <Chip
               key={c.id}
@@ -84,13 +95,18 @@ export function Explore() {
                     : [...filters.categories, c.id],
                 })
               }
+              style={{ flexShrink: 0 }}
             >
               <CategoryIcon id={c.id} /> {c.label}
             </Chip>
           ))}
         </div>
 
-        <div className="source__row" style={{ justifyContent: "space-between" }} aria-live="polite">
+        <div
+          className="source__row"
+          style={{ justifyContent: "space-between", flexWrap: "wrap", rowGap: "var(--radar-space-2)" }}
+          aria-live="polite"
+        >
           <span className="deadline__abs tnum">
             {count} {count === 1 ? "opportunity" : "opportunities"}
           </span>

@@ -262,19 +262,26 @@ export function RadarMark({ size = 32 }: { size?: number }) {
       role="img"
     >
       <path
-        d="M16 4a12 12 0 1 0 12 12"
+        d="M27 25A20 20 0 0 0 7 5"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.5"
         strokeLinecap="round"
+        opacity="0.45"
       />
       <path
-        d="M16 9a7 7 0 1 0 7 7"
+        d="M20 25A13 13 0 0 0 7 12"
         stroke="currentColor"
-        strokeWidth="1.75"
+        strokeWidth="2.25"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+      <path
+        d="M13 25A6 6 0 0 0 7 19"
+        stroke="currentColor"
+        strokeWidth="2.25"
         strokeLinecap="round"
       />
-      <line x1="16" y1="16" x2="26" y2="8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      <circle className="signal" cx="24" cy="9" r="3" />
+      <circle className="signal" cx="7" cy="25" r="2.75" />
     </svg>
   );
 }

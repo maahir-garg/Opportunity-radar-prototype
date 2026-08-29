@@ -1,6 +1,5 @@
 import {
   AlertTriangle,
-  ArrowRight,
   BellRing,
   CalendarClock,
   ChevronRight,
@@ -31,7 +30,7 @@ const NOTIF_ICON = {
 } as const;
 
 export function Notifications() {
-  const { notifications, markNotificationRead, markAllRead, notificationsPermission, setNotificationsPermission } = useStore();
+  const { notifications, unreadCount, markNotificationRead, markAllRead, notificationsPermission, setNotificationsPermission } = useStore();
   const { navigate } = useNav();
 
   const today = notifications.filter((n) => n.createdAt.startsWith("2026-08-28"));
@@ -53,7 +52,7 @@ export function Notifications() {
             <button key={n.id} className={`notif ${n.isRead ? "" : "notif--unread"}`} onClick={() => open(n)}>
               <span className="notif__icon" aria-hidden><Icon size={18} /></span>
               <span style={{ flex: 1 }}>
-                <span style={{ display: "flex", gap: "0.5rem", alignItems: "baseline", justifyContent: "space-between" }}>
+                <span style={{ display: "flex", gap: "var(--radar-space-2)", alignItems: "baseline", justifyContent: "space-between" }}>
                   <span style={{ fontWeight: 600 }}>{n.title}</span>
                   <span className="deadline__abs tnum" style={{ whiteSpace: "nowrap" }}>{timestampLabel(n.createdAt)}</span>
                 </span>
@@ -73,7 +72,18 @@ export function Notifications() {
       <ChildTopBar
         title="Notifications"
         actions={
-          <button className="linkbtn" style={{ paddingInline: "var(--radar-space-2)" }} onClick={markAllRead}>
+          <button
+            className="linkbtn"
+            style={{
+              paddingInline: "var(--radar-space-2)",
+              ...(unreadCount === 0
+                ? { color: "var(--radar-color-text-disabled)", cursor: "default" }
+                : null),
+            }}
+            onClick={unreadCount === 0 ? undefined : markAllRead}
+            disabled={unreadCount === 0}
+            aria-disabled={unreadCount === 0}
+          >
             Mark all read
           </button>
         }
@@ -81,7 +91,7 @@ export function Notifications() {
       <div className="screen stack">
         {notificationsPermission === "denied" ? (
           <div className="alert alert--warning">
-            <AlertTriangle size={16} aria-hidden style={{ flex: "none" }} />
+            <AlertTriangle size={16} aria-hidden style={{ flex: "none", marginTop: "0.125rem" }} />
             Push notifications are off. You still see updates here for saved and watched items.
             <button className="linkbtn" onClick={() => setNotificationsPermission("granted")}>Turn on</button>
           </div>
@@ -127,7 +137,7 @@ export function Profile() {
           <p className="deadline__abs">Year {profile.year} · {profile.faculty}</p>
         </div>
 
-        <Section title="Your interests" overline="Shapes matches">
+        <Section title="Your interests">
           <div style={{ display: "flex", gap: "var(--radar-space-2)", flexWrap: "wrap" }}>
             {categories.map((c) => (
               <Chip
@@ -258,7 +268,7 @@ export function WidgetScreen() {
             {/* Clock */}
             <div style={{ textAlign: "center", color: "var(--radar-color-text-inverse)" }}>
               <p style={{ fontSize: "4rem", fontWeight: 700, lineHeight: 1, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>9:41</p>
-              <p style={{ fontSize: "var(--radar-font-size-body)", opacity: 0.75, marginTop: "0.25rem" }}>Monday, 1 September</p>
+              <p style={{ fontSize: "var(--radar-font-size-body)", opacity: 0.75, marginTop: "var(--radar-space-1)" }}>Friday, 28 August</p>
             </div>
 
             {/* Widget card */}
@@ -301,13 +311,13 @@ export function WidgetScreen() {
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span style={{ display: "flex", alignItems: "center", gap: "var(--radar-space-1)" }}>
-                    <RadarMark size={14} />
-                    <span style={{ fontSize: "var(--radar-font-size-caption)", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--radar-color-signal)" }}>Radar</span>
+                    <RadarMark size={18} />
+                    <span style={{ fontSize: "var(--radar-font-size-small)", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--radar-color-signal)" }}>Radar</span>
                   </span>
                   {isWatching(opp.id) ? (
-                    <span style={{ fontSize: "var(--radar-font-size-caption)", background: "rgba(255,255,255,0.15)", borderRadius: "999px", padding: "0.1rem 0.5rem", fontWeight: 600 }}>Watching</span>
+                    <span style={{ fontSize: "var(--radar-font-size-caption)", background: "rgba(255,255,255,0.15)", borderRadius: "999px", padding: "0.1rem 0.5rem", fontWeight: 600, flexShrink: 0, whiteSpace: "nowrap" }}>Watching</span>
                   ) : opp.match.score >= 50 ? (
-                    <span style={{ fontSize: "var(--radar-font-size-caption)", color: "var(--radar-color-signal)", fontWeight: 700 }}>{opp.match.score}% {opp.match.label}</span>
+                    <span style={{ fontSize: "var(--radar-font-size-caption)", color: "var(--radar-color-match-text)", fontWeight: 700, flexShrink: 0, whiteSpace: "nowrap" }}>{opp.match.score}% {opp.match.label}</span>
                   ) : null}
                 </div>
 
@@ -322,16 +332,6 @@ export function WidgetScreen() {
                       ? formatDeadline(opp.applicationDeadline)
                       : "Dates not yet announced"}
                 </p>
-
-                {opp.progress.nextAction ? (
-                  <p style={{ fontSize: "var(--radar-font-size-caption)", opacity: 0.7 }}>
-                    Next: {opp.progress.nextAction}
-                  </p>
-                ) : null}
-
-                <div style={{ display: "flex", alignItems: "center", gap: "0.25rem", color: "var(--radar-color-signal)", fontWeight: 600, fontSize: "var(--radar-font-size-caption)" }}>
-                  Tap to open <ArrowRight size={12} aria-hidden />
-                </div>
               </button>
             ) : (
               <div style={{

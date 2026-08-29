@@ -73,7 +73,10 @@ export function Plan() {
           <div className="card stack--sm" style={{ borderColor: "var(--radar-color-border-strong)" }}>
             <p className="overline">Next up</p>
             <p style={{ fontWeight: 600 }}>{nextUp.title}</p>
-            <p className="deadline__abs tnum">
+            <p
+              className="deadline__abs tnum"
+              style={{ display: "inline-flex", alignItems: "center", gap: "var(--radar-space-1)" }}
+            >
               <CalendarClock size={14} aria-hidden /> {formatDeadline(nextUp.applicationDeadline!)}
             </p>
             {nextUp.progress.nextAction ? (
@@ -119,7 +122,7 @@ export function Plan() {
         )}
 
         {watched.length ? (
-          <Section title="Watched windows" overline="Expected">
+          <Section title="Watched windows">
             <div className="stack">
               {watched.map((o) => (
                 <button
@@ -202,7 +205,10 @@ function PlanCard({ opp }: { opp: Opportunity }) {
       ) : null}
 
       {opp.progress.reminderAt ? (
-        <p className="deadline__abs">
+        <p
+          className="deadline__abs"
+          style={{ display: "inline-flex", alignItems: "center", gap: "var(--radar-space-1)" }}
+        >
           <Bell size={12} aria-hidden /> Reminder set for {formatDate(opp.progress.reminderAt)}
         </p>
       ) : null}

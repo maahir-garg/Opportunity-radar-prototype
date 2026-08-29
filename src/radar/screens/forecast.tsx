@@ -43,12 +43,9 @@ export function ForecastPreview() {
   return (
     <section className="card stack" aria-labelledby="forecast-preview-h">
       <div className="section__head" style={{ marginBottom: 0 }}>
-        <div>
-          <p className="overline">Plan ahead</p>
-          <h2 className="section__title" id="forecast-preview-h" style={{ display: "inline-flex", gap: "0.5rem", alignItems: "center" }}>
-            Your 30-day Radar
-          </h2>
-        </div>
+        <h2 className="section__title" id="forecast-preview-h" style={{ display: "inline-flex", gap: "var(--radar-space-2)", alignItems: "center" }}>
+          Your 30-day Radar
+        </h2>
       </div>
       <div className="legend">
         <span className="legend__item tnum">
@@ -60,11 +57,11 @@ export function ForecastPreview() {
           {expected.length} expected
         </span>
       </div>
-      <ul className="stack--sm">
+      <ul className="stack stack--sm">
         {nearest.map((o) => (
           <li key={o.id} className="source__row" style={{ justifyContent: "space-between" }}>
-            <span style={{ fontWeight: 600 }}>{o.title}</span>
-            <span className="deadline__abs tnum" style={{ whiteSpace: "nowrap" }}>
+            <span style={{ fontWeight: 600, minWidth: 0, flex: "1 1 auto" }}>{o.title}</span>
+            <span className="deadline__abs tnum" style={{ whiteSpace: "nowrap", flexShrink: 0 }}>
               {formatDate(o.applicationDeadline!)}
             </span>
           </li>
@@ -121,7 +118,7 @@ export function Radar30() {
                     {i < confirmed.length + expected.length - 1 ? <span className="tl__line" aria-hidden /> : null}
                   </div>
                   <button
-                    className="tl__body card card--quiet"
+                    className="tl__body card card--quiet stack stack--sm"
                     style={{ textAlign: "left", cursor: "pointer" }}
                     onClick={() => navigate({ name: "detail", id: o.id })}
                   >
@@ -140,8 +137,8 @@ export function Radar30() {
                     {i < expected.length - 1 ? <span className="tl__line" aria-hidden /> : null}
                   </div>
                   <button
-                    className="tl__body tl__span--expected"
-                    style={{ textAlign: "left", cursor: "pointer", borderRadius: "var(--radar-radius-medium)", padding: "var(--radar-space-3)" }}
+                    className="tl__body tl__span--expected stack stack--sm"
+                    style={{ textAlign: "left", cursor: "pointer", borderRadius: "var(--radar-radius-medium)", padding: "var(--radar-space-4)" }}
                     onClick={() => navigate({ name: "expected", id: o.id })}
                   >
                     <span className="deadline__state" style={{ color: "var(--radar-color-signal-text)" }}>
@@ -154,7 +151,7 @@ export function Radar30() {
               ))}
             </ol>
 
-            <Section title="Needs action" overline="Confirmed">
+            <Section title="Needs action">
               <div className="stack">
                 {confirmed.length ? (
                   confirmed.map((o) => <OpportunityCard key={o.id} opp={o} variant="list" />)
@@ -164,7 +161,7 @@ export function Radar30() {
               </div>
             </Section>
 
-            <Section title="Worth watching" overline="Expected">
+            <Section title="Worth watching">
               <div className="stack">
                 {expected.length ? (
                   expected.map((o) => <ExpectedRow key={o.id} opp={o} />)
@@ -231,7 +228,7 @@ export function ExpectedPreview({ id }: { id: string }) {
           <p className="oppcard__org">{opp.organiser} · {categoryById(opp.categoryId).label}</p>
         </div>
 
-        <div className="card card--quiet stack--sm">
+        <div className="card card--quiet stack stack--sm">
           <p className="overline">Approximate window</p>
           <p style={{ fontWeight: 600 }}>
             {prev ? `Around ${formatDate(prev.announced + "T00:00:00+08:00")} (based on last cycle)` : "Seasonal - timing not yet known"}
@@ -239,7 +236,7 @@ export function ExpectedPreview({ id }: { id: string }) {
           <p className="deadline__abs">Dates not announced for the current cycle.</p>
         </div>
 
-        <div className="stack--sm">
+        <div className="stack stack--sm">
           <p className="overline">Why we expect it</p>
           <p style={{ fontSize: "var(--radar-font-size-small)" }}>{opp.forecast.basis}</p>
           {prev ? (
@@ -249,7 +246,7 @@ export function ExpectedPreview({ id }: { id: string }) {
           ) : null}
         </div>
 
-        <div className="stack--sm">
+        <div className="stack stack--sm">
           <p className="overline">What is still unknown</p>
           {opp.eligibility.toCheck.map((t) => (
             <p key={t} className="eligrow">

@@ -1,14 +1,14 @@
-import { ArrowLeft, Bell, BookMarked, Compass, User, Radar } from "lucide-react";
+import { ArrowLeft, Bell, ListChecks, Compass, CircleUser, House } from "lucide-react";
 import type { ReactNode } from "react";
 import { useNav, type Tab } from "./nav";
 import { useStore } from "./store";
 import { IconButton, RadarMark } from "./ui";
 
 const TABS: { id: Tab; label: string; icon: typeof Compass }[] = [
-  { id: "foryou", label: "For You", icon: Radar },
+  { id: "foryou", label: "For You", icon: House },
   { id: "explore", label: "Explore", icon: Compass },
-  { id: "plan", label: "Plan", icon: BookMarked },
-  { id: "profile", label: "Profile", icon: User },
+  { id: "plan", label: "Plan", icon: ListChecks },
+  { id: "profile", label: "Profile", icon: CircleUser },
 ];
 
 export function RootTopBar({ title }: { title: string }) {
